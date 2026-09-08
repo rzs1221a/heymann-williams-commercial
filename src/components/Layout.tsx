@@ -128,15 +128,19 @@ function Footer() {
             Office {SITE.officePhone}
           </p>
           <p className="mt-3 text-sm text-stone">
-            <a href={SITE.corporatePage} rel="noopener" className="hover:text-bone">
-              Corporate profile ↗
+            <a href={SITE.mlsFeedPage} rel="noopener" className="hover:text-bone">
+              All of Antoinette's MLS listings ↗
+            </a>
+            <br />
+            <a href={SITE.commercialSearch} rel="noopener" className="hover:text-bone">
+              Search all BHHS commercial listings ↗
             </a>
           </p>
         </div>
       </div>
       <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-xs leading-relaxed text-faint">
         <p>
-          {SITE.name}, {SITE.licenseNumber}. {SITE.brokerage}, {SITE.officeAddress}, {SITE.officePhone}.
+          {SITE.name}{SITE.licenseConfirmed ? `, ${SITE.licenseNumber}` : ""}. {SITE.brokerage}, {SITE.officeAddress}, {SITE.officePhone}.
         </p>
         <p className="mt-2">{SITE.franchiseDisclosure}</p>
         <p className="mt-2">

@@ -2,6 +2,7 @@ import { lazy, Suspense, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
 import { allListings } from "../lib/listingsSource";
+import { SITE } from "../lib/site";
 import { USE_TYPE_LABEL, type Transaction, type UseType } from "../lib/commercial";
 import { describeCommercial, matchesCommercial, parseCommercial, criteriaIsEmpty } from "../lib/intent";
 import { record } from "../lib/attunement";
@@ -64,6 +65,14 @@ export default function Listings() {
         A small, curated book of business — every record carries the commercial fields that matter,
         from zoning and frontage to tenancy, and nothing that hasn't been verified.
       </p>
+      <div className="mt-5 flex flex-wrap gap-3">
+        <a href={SITE.mlsFeedPage} rel="noopener" className="btn-signal px-5 py-2.5 text-sm">
+          View all my listings on the MLS ↗
+        </a>
+        <a href={SITE.commercialSearch} rel="noopener" className="btn-ghost px-5 py-2.5 text-sm">
+          Search all BHHS commercial ↗
+        </a>
+      </div>
 
       {/* plain-phrase search — type the way you talk */}
       <div className="mt-8 max-w-2xl">

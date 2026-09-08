@@ -28,8 +28,11 @@ export default function Home() {
           Amelia Island, Yulee, and Callahan.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link to="/listings" className="btn-signal px-6 py-3 text-sm">
-            View current listings
+          <a href={SITE.mlsFeedPage} rel="noopener" className="btn-signal px-6 py-3 text-sm">
+            View all my listings ↗
+          </a>
+          <Link to="/listings" className="btn-ghost px-6 py-3 text-sm">
+            Featured commercial
           </Link>
           <a href={telHref} className="btn-ghost px-6 py-3 text-sm">
             Call {SITE.phone}
@@ -46,9 +49,9 @@ export default function Home() {
               Every listing, answered in full.
             </h2>
           </div>
-          <Link to="/listings" className="text-sm text-signal-soft hover:text-bone">
-            All listings →
-          </Link>
+          <a href={SITE.mlsFeedPage} rel="noopener" className="text-sm text-signal-soft hover:text-bone">
+            Live MLS feed — all listings →
+          </a>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {listings.slice(0, 6).map((l) => (
