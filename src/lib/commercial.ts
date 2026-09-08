@@ -19,7 +19,8 @@ export type UseType =
   | "hospitality"
   | "multifamily"
   | "land"
-  | "special-purpose";
+  | "special-purpose"
+  | "residential";
 
 export type Transaction = "sale" | "lease" | "sale-or-lease";
 
@@ -130,6 +131,7 @@ export const USE_TYPE_LABEL: Record<UseType, string> = {
   multifamily: "Multifamily",
   land: "Land",
   "special-purpose": "Special Purpose",
+  residential: "Residential",
 };
 
 export const LEASE_BASIS_LABEL: Record<LeaseBasis, string> = {

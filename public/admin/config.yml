@@ -58,8 +58,8 @@ collections:
               - { name: id, label: "ID (short, stable)", widget: string }
               - { name: slug, label: "URL slug (address-derived, never change once live)", widget: string }
               - { name: transaction, label: "Transaction", widget: select, options: ["sale", "lease", "sale-or-lease"] }
-              - { name: useType, label: "Use type", widget: select, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose"] }
-              - { name: secondaryUses, label: "Secondary uses", widget: select, multiple: true, required: false, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose"] }
+              - { name: useType, label: "Use type", widget: select, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose", "residential"] }
+              - { name: secondaryUses, label: "Secondary uses", widget: select, multiple: true, required: false, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose", "residential"] }
               - { name: address, label: "Address", widget: string }
               - { name: city, label: "City", widget: string }
               - { name: county, label: "County", widget: string, default: "Nassau" }
@@ -163,7 +163,7 @@ collections:
               - { name: lon, label: "Longitude", widget: number, value_type: float }
               - { name: zoom, label: "Map zoom", widget: number, value_type: float }
               - { name: cities, label: "Listing cities included", widget: list, field: { name: item, label: "City", widget: string } }
-              - { name: useTypes, label: "Typical use types", widget: select, multiple: true, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose"] }
+              - { name: useTypes, label: "Typical use types", widget: select, multiple: true, options: ["office", "retail", "industrial", "flex", "medical", "hospitality", "multifamily", "land", "special-purpose", "residential"] }
               - { name: corridors, label: "Notable corridors", widget: list, field: { name: item, label: "Corridor", widget: string } }
               - { name: intro, label: "Intro prose (150–200 words, unique)", widget: text }
               - name: faqs

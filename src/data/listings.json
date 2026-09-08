@@ -1,13 +1,152 @@
 {
   "sample": false,
-  "note": "LIVE INVENTORY — the firm's active commercial listings in the AINCAR MLS, per Antoinette's inventory email of 2026-08-18 with details corroborated from the public listing record. Statuses should be re-verified against the MLS before any material update. The Callahan parcel is listed with the facts that are public (price, address, status) — acreage, parcel ID, and exact coordinates need Antoinette's confirmation. Additional inventory held in her own name can be added here or through /admin.",
+  "note": "LIVE INVENTORY. Antoinette's own MLS listings (per her BHHS agent feed, pulled 2026-09-07) plus the firm's other active AINCAR commercial listings (per her 2026-08-18 inventory email). Statuses should be re-verified against the MLS before any material update. Photos: MLS photos are hosted on the BHHS/Cirrus CDN and must be downloaded and dropped into /photos; placeholders stand in until then.",
   "listings": [
+    {
+      "id": "sr200-callahan-land",
+      "slug": "state-road-200-callahan-land",
+      "transaction": "sale",
+      "useType": "land",
+      "address": "State Road 200 (unaddressed parcel)",
+      "city": "Callahan",
+      "county": "Nassau",
+      "state": "FL",
+      "zip": "32011",
+      "lat": 30.583385,
+      "lon": -81.806023,
+      "zoning": "RM — rezoning application submitted",
+      "zoningNote": "Currently zoned RM with a Future Land Use designation of Commercial; a rezoning application has been submitted. Town of Callahan water and sewer are available — buyer to verify availability, capacity, connection requirements, and fees.",
+      "salePrice": 500000,
+      "landAcres": 0.49,
+      "frontageOn": "SR 200",
+      "headline": "Half an acre of SR 200 frontage at the Callahan gateway, rezoning in motion",
+      "summary": "Exceptional development opportunity on SR 200 near the growing Town of Callahan. This vacant 0.49-acre parcel (21,344 SF) offers outstanding visibility along the area's primary east-west corridor with excellent exposure to daily traffic and convenient access to Jacksonville, I-95, and US 301. Located in an expanding business district, the property is well positioned for future investment or owner-user development.",
+      "positioning": "Professional office, retail, service business, flex space, warehouse, or another commercial project — long-term potential in one of Nassau County's growing commercial corridors. Buyers verify the rezoning status, permitted uses, utilities, and development requirements with the appropriate authorities.",
+      "photos": [
+        {
+          "src": "/photos/state-road-200-callahan-land-hero.svg",
+          "alt": "State Road 200 parcel, Callahan — MLS photo pending download"
+        }
+      ],
+      "status": "available",
+      "listedAt": "2026-08-03",
+      "source": "mls-aincar",
+      "mlsNumber": "116892"
+    },
+    {
+      "id": "avery-road-a1a",
+      "slug": "avery-road-fernandina-beach",
+      "transaction": "sale",
+      "useType": "land",
+      "secondaryUses": [
+        "retail",
+        "medical",
+        "office"
+      ],
+      "address": "Avery Road",
+      "city": "Fernandina Beach",
+      "county": "Nassau",
+      "state": "FL",
+      "zip": "32034",
+      "lat": 30.6068,
+      "lon": -81.453,
+      "zoning": "RSF-2 — COM (Commercial) Future Land Use",
+      "zoningNote": "Zoned RSF-2 with a COM Future Land Use designation; commercial redevelopment subject to rezoning, access, permitting, and governmental approvals. Commercial Letter of Availability from FGUA is confirmed.",
+      "salePrice": 325000,
+      "landAcres": 0.19,
+      "frontageOn": "First Coast Highway / A1A",
+      "headline": "First Coast Highway corridor assemblage — parcel 1 of 2, ~102 ft of A1A frontage combined",
+      "summary": "Offered only as part of a two-parcel assemblage totaling approximately 0.40 acres (17,424 SF) with approximately 102 linear feet of continuous frontage on First Coast Highway/A1A. This parcel is not offered individually; sale is contingent on the simultaneous purchase and closing of the adjoining parcel at 1407 Ian Drive (MLS 117258). Combined asking price for both parcels is $650,000.",
+      "positioning": "A compact highway-fronting footprint for retail, professional/medical or dental office, QSR/fast-casual, and other neighborhood-serving commercial uses, subject to approval. Buyer to independently verify zoning, Future Land Use, allowable uses, access, utilities, and development standards.",
+      "photos": [
+        {
+          "src": "/photos/avery-road-fernandina-beach-hero.svg",
+          "alt": "Avery Road parcel on the First Coast Highway corridor — MLS photo pending download"
+        }
+      ],
+      "status": "available",
+      "listedAt": "2026-09-03",
+      "source": "mls-aincar",
+      "mlsNumber": "117269"
+    },
+    {
+      "id": "1407-ian-drive-a1a",
+      "slug": "1407-ian-drive-fernandina-beach",
+      "transaction": "sale",
+      "useType": "land",
+      "secondaryUses": [
+        "retail",
+        "medical",
+        "office"
+      ],
+      "address": "1407 Ian Drive",
+      "city": "Fernandina Beach",
+      "county": "Nassau",
+      "state": "FL",
+      "zip": "32034",
+      "lat": 30.6066,
+      "lon": -81.4532,
+      "zoning": "RSF-2 — COM (Commercial) Future Land Use",
+      "zoningNote": "Zoned RSF-2 with a COM Future Land Use designation; commercial redevelopment subject to rezoning, access, permitting, and governmental approvals. Commercial Letter of Availability from FGUA is confirmed.",
+      "salePrice": 325000,
+      "landAcres": 0.19,
+      "yearBuilt": 1973,
+      "frontageOn": "First Coast Highway / A1A",
+      "headline": "First Coast Highway corridor assemblage — parcel 2 of 2, ~102 ft of A1A frontage combined",
+      "summary": "Offered only as part of a two-parcel assemblage totaling approximately 0.40 acres (17,424 SF) with approximately 102 linear feet of continuous frontage on First Coast Highway/A1A. This parcel is not offered individually; sale is contingent on the simultaneous purchase and closing of the adjoining Avery Road parcel (MLS 117269). Combined asking price for both parcels is $650,000.",
+      "positioning": "A compact highway-fronting footprint for retail, professional/medical or dental office, QSR/fast-casual, and other neighborhood-serving commercial uses, subject to approval. Buyer to independently verify zoning, Future Land Use, allowable uses, access, utilities, and development standards.",
+      "photos": [
+        {
+          "src": "/photos/1407-ian-drive-fernandina-beach-hero.svg",
+          "alt": "1407 Ian Drive parcel on the First Coast Highway corridor — MLS photo pending download"
+        }
+      ],
+      "status": "available",
+      "listedAt": "2026-09-03",
+      "source": "mls-aincar",
+      "mlsNumber": "117258"
+    },
+    {
+      "id": "1022-old-hickory",
+      "slug": "1022-old-hickory-road-jacksonville",
+      "transaction": "sale",
+      "useType": "residential",
+      "address": "1022 Old Hickory Road",
+      "city": "Jacksonville",
+      "county": "Duval",
+      "state": "FL",
+      "zip": "32207",
+      "lat": 30.309515,
+      "lon": -81.643013,
+      "salePrice": 379999,
+      "buildingSF": 1176,
+      "landAcres": 0.16,
+      "yearBuilt": 1938,
+      "stories": 1,
+      "tenancy": "owner-user",
+      "headline": "A move-in-ready 1938 brick ranch in St. Nicholas / South Shores",
+      "summary": "Charming 2-bedroom, 1-bath brick ranch in Jacksonville's desirable St. Nicholas/South Shores neighborhood. Original hardwood floors and doors, an updated kitchen with newer appliances, an updated bathroom, and a new A/C installed in 2023. The fully fenced backyard has a new deck and outdoor fireplace area; a detached workshop/garage provides flexible space for storage, hobbies, or a home office, and the crawl space is fully encapsulated.",
+      "positioning": "Minutes from San Marco, downtown Jacksonville, shopping, dining, medical centers, and major roadways. Detached carport, wood-burning fireplace, central heat; dishwasher, dryer, electric range, microwave, refrigerator, and washer convey.",
+      "photos": [
+        {
+          "src": "/photos/1022-old-hickory-road-jacksonville-hero.svg",
+          "alt": "1022 Old Hickory Road, Jacksonville — MLS photo pending download"
+        }
+      ],
+      "status": "available",
+      "listedAt": "2026-08-07",
+      "source": "mls-nefmls",
+      "mlsNumber": "2159170"
+    },
     {
       "id": "s3rd-city-mart-unit-b",
       "slug": "5-s-3rd-street-unit-b-fernandina-beach",
       "transaction": "sale",
       "useType": "retail",
-      "secondaryUses": ["office", "special-purpose"],
+      "secondaryUses": [
+        "office",
+        "special-purpose"
+      ],
       "address": "5 S 3rd Street, Unit B",
       "city": "Fernandina Beach",
       "county": "Nassau",
@@ -69,38 +208,14 @@
       "listingAgent": "Craig Brewis"
     },
     {
-      "id": "sr200-callahan-land",
-      "slug": "state-road-200-callahan-land",
-      "transaction": "sale",
-      "useType": "land",
-      "address": "State Road 200 (unaddressed parcel)",
-      "city": "Callahan",
-      "county": "Nassau",
-      "state": "FL",
-      "zip": "32011",
-      "lat": 30.562,
-      "lon": -81.821,
-      "zoningNote": "Parcel details (acreage, zoning, exact location) pending confirmation — inquire for the full package.",
-      "salePrice": 500000,
-      "headline": "Commercial land on the SR-200 corridor at Callahan",
-      "summary": "Vacant commercial land on State Road 200 at the west end of Nassau County, where the A1A corridor meets the US-1 crossroads at Callahan — the junction that carries traffic between Jacksonville, the coast, and southeast Georgia.",
-      "positioning": "For the buyer who wants corridor land at the county's western gateway, at half the entry price of comparable ground closer to the coast.",
-      "photos": [
-        {
-          "src": "/photos/state-road-200-callahan-land-hero.svg",
-          "alt": "Stylized placeholder graphic for the State Road 200 parcel in Callahan — property photography pending"
-        }
-      ],
-      "status": "available",
-      "source": "mls-aincar",
-      "mlsNumber": "116892"
-    },
-    {
       "id": "n4th-historic",
       "slug": "22-n-4th-street-fernandina-beach",
       "transaction": "sale",
       "useType": "office",
-      "secondaryUses": ["retail", "hospitality"],
+      "secondaryUses": [
+        "retail",
+        "hospitality"
+      ],
       "address": "22 N 4th Street",
       "city": "Fernandina Beach",
       "county": "Nassau",
