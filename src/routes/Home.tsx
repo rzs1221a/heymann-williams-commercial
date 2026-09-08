@@ -99,17 +99,15 @@ export default function Home() {
 
       {/* the inventory — every listing, as a ledger */}
       <Reveal as="section" className="wrap section">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow">Current inventory</p>
-            <h2 className="t-section mt-3">Every listing, in full.</h2>
-          </div>
-          <a href={SITE.mlsFeedPage} rel="noopener" className="text-sm text-accent hover:text-fg">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <p className="eyebrow">Current inventory</p>
+          <h2 className="t-section mt-3">Every listing, in full.</h2>
+          <a href={SITE.mlsFeedPage} rel="noopener" className="mt-3 inline-block text-sm text-accent hover:text-fg">
             All listings on the MLS →
           </a>
         </div>
         <ListingLedger listings={listings} />
-        <p className="reading mt-8 max-w-2xl text-fg-2">
+        <p className="reading mx-auto mt-8 max-w-2xl text-center text-fg-2">
           Every property page already has the traffic counts, frontage, zoning, and drive times a
           site selector needs. Then{" "}
           <Link to="/explore" className="text-accent hover:text-fg">
@@ -121,20 +119,18 @@ export default function Home() {
 
       {/* the markets — an editorial index, not tiles */}
       <Reveal as="section" className="wrap">
-        <div className="rule-strong section grid gap-10 lg:grid-cols-12 lg:gap-x-6">
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
-              <p className="eyebrow">The submarkets</p>
-              <h2 className="t-section mt-3">One county, four commercial markets.</h2>
-              <Link
-                to="/nassau-county-commercial-real-estate"
-                className="mt-6 inline-block text-sm text-accent hover:text-fg"
-              >
-                Read the county overview →
-              </Link>
-            </div>
+        <div className="rule-strong section">
+          <div className="mx-auto mb-10 max-w-2xl text-center">
+            <p className="eyebrow">The submarkets</p>
+            <h2 className="t-section mt-3">One county, four commercial markets.</h2>
+            <Link
+              to="/nassau-county-commercial-real-estate"
+              className="mt-3 inline-block text-sm text-accent hover:text-fg"
+            >
+              Read the county overview →
+            </Link>
           </div>
-          <ol className="lg:col-span-8">
+          <ol className="mx-auto max-w-3xl">
             {submarkets.map((m, i) => (
               <li key={m.slug} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-6 first:border-t first:border-line">
                 <span className="num pt-1 text-sm text-fg-3">{String(i + 1).padStart(2, "0")}</span>
@@ -154,15 +150,15 @@ export default function Home() {
       {/* why her — a ruled triptych on ink */}
       <Reveal as="section" className="on-ink bg-ground text-fg">
         <div className="wrap section">
-          <div className="grid sm:grid-cols-3">
+          <div className="grid text-center sm:grid-cols-3">
             {WHY.map((w, i) => (
               <div
                 key={w.eyebrow}
-                className={`border-t border-line py-8 sm:pr-8 ${i > 0 ? "sm:border-l sm:pl-8" : ""}`}
+                className={`border-t border-line px-6 py-8 ${i > 0 ? "sm:border-l" : ""}`}
               >
                 <p className="eyebrow">{w.eyebrow}</p>
                 <h2 className="t-section mt-3">{w.head}</h2>
-                <p className="reading mt-4 text-fg-2">{w.body}</p>
+                <p className="reading mx-auto mt-4 max-w-xs text-fg-2">{w.body}</p>
               </div>
             ))}
           </div>
@@ -170,24 +166,24 @@ export default function Home() {
       </Reveal>
 
       {/* the close */}
-      <Reveal as="section" className="wrap section grid gap-10 lg:grid-cols-12 lg:gap-x-6" id="contact">
-        <div className="lg:col-span-5">
+      <Reveal as="section" className="wrap section" id="contact">
+        <div className="mx-auto mb-10 max-w-xl text-center">
           <p className="eyebrow">Start here</p>
           <h2 className="t-section mt-3">Tell her what you're looking for.</h2>
-          <p className="reading mt-4 max-w-md text-fg-2">
+          <p className="reading mx-auto mt-4 max-w-md text-fg-2">
             Five fields, one conversation. Requirements stay confidential.
           </p>
           <p className="mt-6 text-sm text-fg-2">
             <a href={telHref} className="text-fg hover:text-accent">
               {SITE.phone}
-            </a>
-            <br />
+            </a>{" "}
+            ·{" "}
             <a href={mailHref} className="hover:text-fg">
               {SITE.email}
             </a>
           </p>
         </div>
-        <div className="lg:col-span-7">
+        <div className="mx-auto max-w-2xl">
           <LeadForm />
         </div>
       </Reveal>
