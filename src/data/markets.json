@@ -5,16 +5,38 @@
       "slug": "nassau-county-commercial-real-estate",
       "name": "Nassau County",
       "shortName": "Nassau County",
-      "h1": "Nassau County Commercial Real Estate",
-      "tagline": "Florida's northeast corner, where I-95, the rail, and the port meet the fastest-growing county in the region.",
+      "h1": "Nassau County, FL Commercial Real Estate for Lease & Sale",
+      "tagline": "Commercial property for lease and sale across Nassau County, FL, from the Port of Fernandina to I-95. Retail, medical, flex, industrial, and land, with tenant and landlord representation.",
       "lat": 30.61,
       "lon": -81.65,
       "zoom": 9.6,
-      "cities": ["Fernandina Beach", "Yulee", "Callahan", "Amelia Island"],
-      "useTypes": ["retail", "industrial", "land", "office", "hospitality"],
-      "corridors": ["I-95 (exits 373, 380)", "SR-200 / A1A", "US-17", "US-1 / US-23", "US-301", "CSX and First Coast Railroad"],
+      "cities": [
+        "Fernandina Beach",
+        "Yulee",
+        "Callahan",
+        "Amelia Island"
+      ],
+      "useTypes": [
+        "retail",
+        "industrial",
+        "land",
+        "office",
+        "hospitality"
+      ],
+      "corridors": [
+        "I-95 (exits 373, 380)",
+        "SR-200 / A1A",
+        "US-17",
+        "US-1 / US-23",
+        "US-301",
+        "CSX and First Coast Railroad"
+      ],
       "intro": "Nassau County is the last uncongested quadrant of the Jacksonville metro — a county with an Atlantic deepwater port, two interstate exits, three federal highways, and a population growing faster than anywhere else on the First Coast. Commercial demand here runs on three engines. The SR-200 corridor between I-95 and Amelia Island is absorbing retail, medical, and service inventory as Yulee's rooftops multiply around Wildlight and the East Nassau employment center. The island economy — tourism, hospitality, marine, and the professional offices that serve it — keeps Fernandina Beach inventory scarce and tightly held. And the county's western reach along US-1 and US-301 through Callahan carries the industrial story: rail-served land, truck routes, and the large-parcel sites that no longer exist inside Jacksonville. Inventory is thin, deals are relationship-driven, and the public data undercounts what actually trades. That is exactly why a dedicated local commercial practice matters here more than in a downtown tower market.",
       "faqs": [
+        {
+          "q": "Can I lease commercial space in Nassau County?",
+          "a": "Yes. BHHS Heymann Williams Commercial represents tenants and landlords on retail, medical, office, flex, and industrial space across Fernandina Beach, Yulee, and Callahan. Tell us the size, use, and timing and we will source options on and off market, including space that never lists publicly."
+        },
         {
           "q": "What does commercial land cost in Nassau County?",
           "a": "It ranges widely by corridor: SR-200 retail frontage near I-95 commands the county's top land pricing, while US-1 and US-301 acreage west of the interstate still trades at a fraction of Jacksonville equivalents. Most transactions are unlisted or quietly marketed, so corridor comps matter more than portal searches."
@@ -33,16 +55,33 @@
       "slug": "fernandina-beach-commercial-real-estate",
       "name": "Fernandina Beach",
       "shortName": "Fernandina",
-      "h1": "Fernandina Beach Commercial Real Estate",
-      "tagline": "A working port, a historic downtown, and the tightest commercial inventory in Northeast Florida.",
+      "h1": "Fernandina Beach, FL Commercial Real Estate for Lease & Sale",
+      "tagline": "Commercial property for lease and sale in Fernandina Beach, FL: Centre Street storefronts, the historic district, and the A1A and Sadler Road corridors, with the tightest inventory in Northeast Florida.",
       "lat": 30.663,
       "lon": -81.4595,
       "zoom": 12.6,
-      "cities": ["Fernandina Beach"],
-      "useTypes": ["retail", "office", "hospitality", "medical", "special-purpose"],
-      "corridors": ["Centre Street", "S 8th Street / A1A", "Sadler Road", "S 14th Street medical district"],
+      "cities": [
+        "Fernandina Beach"
+      ],
+      "useTypes": [
+        "retail",
+        "office",
+        "hospitality",
+        "medical",
+        "special-purpose"
+      ],
+      "corridors": [
+        "Centre Street",
+        "S 8th Street / A1A",
+        "Sadler Road",
+        "S 14th Street medical district"
+      ],
       "intro": "Fernandina Beach is a fifty-block Victorian downtown attached to a working deepwater port, wrapped in an island economy that runs twelve months a year. Commercial property here behaves unlike anywhere else on the First Coast: buildings hold for generations, the historic district caps new supply by design, and buyers routinely wait years for a Centre Street address to surface. The corridors tell the story. Centre Street and its side blocks carry retail, restaurants, galleries, and the second-floor offices above them. Eighth Street — the A1A spine every islander drives daily — is where freestanding buildings, banks, and service retail concentrate. Sadler Road serves the beach side and the grocery-anchored daily-needs trade. And the 14th Street district around Baptist Medical Center Nassau has quietly become the island's medical-office submarket. When something trades here, it trades on relationships and preparation — knowing the zoning, the parking math, and the design-review process before the offer, not after.",
       "faqs": [
+        {
+          "q": "Can I lease retail or office space in Fernandina Beach?",
+          "a": "Yes, though inventory is tight and much of it trades before it lists. We represent tenants looking for Centre Street, historic district, and A1A space, and landlords positioning space for lease. Share your requirement and we will surface what is available and what is coming."
+        },
         {
           "q": "How tight is commercial inventory in Fernandina Beach?",
           "a": "Extremely. The historic district is effectively built out, so availability comes from tenant turnover and estate sales rather than new construction. Well-priced downtown buildings often trade before they are publicly marketed."
@@ -61,16 +100,34 @@
       "slug": "yulee-commercial-real-estate",
       "name": "Yulee",
       "shortName": "Yulee",
-      "h1": "Yulee Commercial Real Estate",
-      "tagline": "The SR-200 corridor: where Nassau County's growth actually lands.",
+      "h1": "Yulee, FL Commercial Real Estate for Lease & Sale",
+      "tagline": "Commercial property for lease and sale in Yulee, FL along the SR-200 and US-17 corridors: retail, medical, flex, light industrial, and land, with tenant and landlord representation.",
       "lat": 30.632,
       "lon": -81.577,
       "zoom": 11.8,
-      "cities": ["Yulee"],
-      "useTypes": ["retail", "medical", "flex", "industrial", "land"],
-      "corridors": ["SR-200 / A1A", "US-17", "I-95 exit 373", "William Burgess Boulevard", "Wildlight / East Nassau"],
+      "cities": [
+        "Yulee"
+      ],
+      "useTypes": [
+        "retail",
+        "medical",
+        "flex",
+        "industrial",
+        "land"
+      ],
+      "corridors": [
+        "SR-200 / A1A",
+        "US-17",
+        "I-95 exit 373",
+        "William Burgess Boulevard",
+        "Wildlight / East Nassau"
+      ],
       "intro": "Yulee is where the county's population growth converts into commercial absorption. The nine miles of SR-200 between I-95 and the Amelia River have shifted in a decade from rural highway to the county's primary retail corridor — grocery anchors, national outparcels, medical clinics, and the service businesses that follow rooftops. Behind the corridor, the Wildlight master-planned community and the East Nassau Stewardship District are delivering the housing and employment base that underwrites the next decade of demand. The commercial logic here is simple and unforgiving: traffic counts, median cuts, and signal position decide retail value; I-95 proximity decides industrial and flex value along US-17; and entitled land in the path of the corridor appreciates faster than any improved asset in the county. Sites with full access and utilities are already scarce. For operators priced out of the island and investors who want growth-market fundamentals with Florida coastal demographics, Yulee is the working answer.",
       "faqs": [
+        {
+          "q": "Can I lease commercial space in Yulee?",
+          "a": "Yes. We represent tenants and landlords on retail, medical, flex, and light industrial space along SR-200 and US-17, the corridor where Nassau County's growth is landing. Tell us the size, use, and timing and we will source on and off market options, including space that never lists publicly."
+        },
         {
           "q": "What are traffic counts on SR-200?",
           "a": "The corridor carries some of the heaviest volumes in the county, concentrated between I-95 and the bridge to the island. Every listing on this site cites its FDOT count with the station and year, so you can underwrite from the same figure the state publishes."
@@ -89,16 +146,32 @@
       "slug": "callahan-commercial-real-estate",
       "name": "Callahan",
       "shortName": "Callahan",
-      "h1": "Callahan Commercial Real Estate",
-      "tagline": "Rail, truck routes, and the large parcels the rest of the metro ran out of.",
+      "h1": "Callahan, FL Commercial Real Estate for Lease & Sale",
+      "tagline": "Commercial property for lease and sale in Callahan, FL: rail-served industrial, truck-route flex, large parcels, and SR-200 frontage, with tenant and landlord representation in West Nassau.",
       "lat": 30.562,
       "lon": -81.83,
       "zoom": 12.2,
-      "cities": ["Callahan"],
-      "useTypes": ["land", "industrial", "retail", "special-purpose"],
-      "corridors": ["US-1 / US-23", "US-301", "SR-200 west", "CSX mainline"],
+      "cities": [
+        "Callahan"
+      ],
+      "useTypes": [
+        "land",
+        "industrial",
+        "retail",
+        "special-purpose"
+      ],
+      "corridors": [
+        "US-1 / US-23",
+        "US-301",
+        "SR-200 west",
+        "CSX mainline"
+      ],
       "intro": "Callahan is Nassau County's working crossroads — the junction where US-1, US-301, and the CSX mainline meet twenty minutes from Jacksonville International Airport. For a century that geography made it a timber and agriculture town; the same geography now makes it the county's industrial land bank. Large, high-and-dry parcels with rail adjacency and federal-highway frontage exist here at a scale and price Jacksonville's industrial market abandoned years ago, and the county's certified mega-site program has put the area on the radar of manufacturers and logistics users hunting the Southeast. The town itself carries a steady retail and service trade serving western Nassau's fast-growing residential base, with US-1 frontage as the main street of that economy. The commercial play in Callahan is patience and position: corridor land ahead of the next rezoning cycle, rail-served sites ahead of the next industrial announcement, and small-town retail that gets stronger with every subdivision approved west of I-95.",
       "faqs": [
+        {
+          "q": "Can I lease industrial or flex space in Callahan?",
+          "a": "Yes. Callahan is where rail-served industrial, truck-route flex, and the large parcels the rest of the metro ran out of come together. We represent tenants and landlords on that space and can source options on and off market."
+        },
         {
           "q": "Why do industrial users look at Callahan?",
           "a": "Scale and rail. Contiguous acreage on or near the CSX mainline, with US-301 and US-1 truck routes and the airport twenty minutes away, at land prices Jacksonville's industrial corridors left behind."
@@ -117,16 +190,34 @@
       "slug": "amelia-island-commercial-real-estate",
       "name": "Amelia Island",
       "shortName": "Amelia Island",
-      "h1": "Amelia Island Commercial Real Estate",
-      "tagline": "A resort island's commercial market: hospitality-grade demand, island-grade scarcity.",
+      "h1": "Amelia Island, FL Commercial Real Estate for Lease & Sale",
+      "tagline": "Commercial property for lease and sale on Amelia Island, FL: hospitality, resort retail, and the scarce commercial inventory of a resort island, with tenant and landlord representation.",
       "lat": 30.6156,
       "lon": -81.4539,
       "zoom": 11.6,
-      "cities": ["Fernandina Beach", "Amelia Island"],
-      "useTypes": ["hospitality", "retail", "office", "multifamily", "special-purpose"],
-      "corridors": ["A1A / First Coast Highway", "Sadler Road", "S Fletcher Avenue", "Amelia Island Parkway"],
+      "cities": [
+        "Fernandina Beach",
+        "Amelia Island"
+      ],
+      "useTypes": [
+        "hospitality",
+        "retail",
+        "office",
+        "multifamily",
+        "special-purpose"
+      ],
+      "corridors": [
+        "A1A / First Coast Highway",
+        "Sadler Road",
+        "S Fletcher Avenue",
+        "Amelia Island Parkway"
+      ],
       "intro": "Amelia Island runs a two-sided commercial economy. On one side sit the resorts — the Ritz-Carlton and Omni Amelia Island anchor a hospitality market that fills restaurants, spas, golf, and event venues with visitor spending across all four seasons. On the other side sits a real year-round community of thirteen thousand islanders whose services — medical, professional, marine, food and beverage — occupy nearly every commercially zoned foot the island has. The result is structural scarcity: thirteen miles of barrier island, most of it residential, conservation, or resort-held, with commercial nodes at Sadler Road, the A1A corridor south toward the Plantation, and Fletcher along the beach. Assets here rarely reach open marketing, values hold through cycles that bruise mainland markets, and hospitality-adjacent uses pay a premium for any position inside the visitor flow. Buying or leasing on the island is less a search problem than an access problem — knowing who owns what, and being first in line when circumstances change.",
       "faqs": [
+        {
+          "q": "Can I lease commercial space on Amelia Island?",
+          "a": "Yes, with the caveat that island inventory is scarce and hospitality-grade demand keeps it that way. We represent tenants and landlords on resort retail, restaurant, and hospitality space and will tell you honestly what is and is not available."
+        },
         {
           "q": "Can I buy hospitality property on Amelia Island?",
           "a": "Occasionally — inns, restaurant buildings, and event venues do trade, but quietly and infrequently. Most opportunities move through direct relationships before they are ever publicly listed, which is why representation with island-specific reach matters."
