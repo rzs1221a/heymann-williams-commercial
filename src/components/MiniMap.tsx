@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { CommercialListing } from "../lib/commercial";
 
 /**
- * The light map — a locator, not the instrument (/explore is the instrument).
+ * The light map — a locator; the full map with traffic, frontage, and drive times is /explore.
  * maplibre-gl is imported dynamically and only once the panel actually
  * scrolls into view, so it never rides in the main bundle and never touches
  * first paint on a ranking page.
@@ -92,8 +92,8 @@ export default function MiniMap({
   }, [visible, listings, view, interactive]);
 
   return (
-    <div className="glass overflow-hidden">
-      <div ref={el} className={`${heightClass} w-full bg-raise`} role="region" aria-label="Property locations map" />
+    <div className="overflow-hidden rounded border border-line">
+      <div ref={el} className={`${heightClass} w-full bg-ground-2`} role="region" aria-label="Property locations map" />
     </div>
   );
 }

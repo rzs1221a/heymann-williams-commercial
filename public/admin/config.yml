@@ -32,6 +32,7 @@ collections:
           - { name: phone, label: "Your direct phone (displayed)", widget: string }
           - { name: phoneE164, label: "Your direct phone (dialing format, +1…)", widget: string }
           - { name: email, label: "Email", widget: string }
+          - { name: portrait, label: "Portrait (square, at least 800px)", widget: image, required: false, hint: "Shown in the home page byline and on About." }
           - { name: licenseNumber, label: "Florida license number", widget: string, hint: "Required on advertising. Shown in the footer." }
           - { name: licenseConfirmed, label: "License number confirmed", widget: boolean }
           - { name: domain, label: "Site domain", widget: string }

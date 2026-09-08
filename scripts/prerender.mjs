@@ -129,6 +129,7 @@ const AGENT_LD = {
     addressCountry: "US",
   },
   areaServed: profile.serviceAreas,
+  ...(profile.portrait ? { image: `${ORIGIN}${profile.portrait}` } : {}),
 };
 
 const crumbs = (items) => ({
@@ -160,18 +161,19 @@ function inject(html, jsonLd, body) {
     .replace("</head>", `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`)
     .replace(
       '<div id="root"></div>',
-      `<div id="root"><div style="max-width:52rem;margin:0 auto;padding:6rem 1.25rem;color:#f7f7f9;background:#12151d;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.6">${body}</div></div>`
+      `<div id="root"><div style="max-width:60rem;margin:0 auto;padding:5rem 1.25rem 4rem;color:#1B1714;background:#F8F5EF;font-family:'Instrument Sans Variable','Helvetica Neue',Arial,sans-serif;line-height:1.6">${body}</div></div>`
     );
 }
 
-const footerHtml = `<hr style="border:none;border-top:1px solid rgba(255,255,255,.15);margin:3rem 0 1rem"/>
-<p style="font-size:.8em;opacity:.7">${esc(profile.name)} · ${esc(profile.title)} · ${esc(profile.brokerage)}, ${esc(profile.officeAddress)} · ${esc(profile.phone)} · <a href="mailto:${esc(profile.email)}" style="color:#c98cad">${esc(profile.email)}</a></p>
+const footerHtml = `<hr style="border:none;border-top:1px solid rgba(27,23,20,.16);margin:3rem 0 1rem"/>
+<p style="font-size:.8em;opacity:.7">${esc(profile.name)} · ${esc(profile.title)} · ${esc(profile.brokerage)}, ${esc(profile.officeAddress)} · ${esc(profile.phone)} · <a href="mailto:${esc(profile.email)}" style="color:#670038">${esc(profile.email)}</a></p>
 <p style="font-size:.7em;opacity:.55">${esc(profile.franchiseDisclosure)}</p>`;
 
 const TX_LABEL = { sale: "For Sale", lease: "For Lease", "sale-or-lease": "Sale or Lease" };
 const USE_LABEL = {
   office: "Office", retail: "Retail", industrial: "Industrial", flex: "Flex", medical: "Medical",
   hospitality: "Hospitality", multifamily: "Multifamily", land: "Land", "special-purpose": "Special Purpose",
+  residential: "Residential",
 };
 
 function listingPriceLine(l) {
@@ -205,8 +207,8 @@ function listingSpecsHtml(l) {
     l.tenancy && ["Tenancy", l.tenancy],
     l.occupancyPct !== undefined && ["Occupancy", `${l.occupancyPct}%`],
   ].filter(Boolean);
-  return `<table style="width:100%;border-collapse:collapse;font-size:.95em">${rows
-    .map(([k, v]) => `<tr><td style="padding:.4em .8em .4em 0;opacity:.6;vertical-align:top">${esc(k)}</td><td style="padding:.4em 0">${esc(v)}</td></tr>`)
+  return `<table style="width:100%;border-collapse:collapse;font-size:.95em;font-variant-numeric:tabular-nums">${rows
+    .map(([k, v]) => `<tr style="border-bottom:1px solid rgba(27,23,20,.12)"><td style="padding:.5em .8em .5em 0;color:#5C554E;vertical-align:top">${esc(k)}</td><td style="padding:.5em 0;text-align:right">${esc(v)}</td></tr>`)
     .join("")}</table>`;
 }
 
@@ -221,25 +223,25 @@ const listingPath = (l) => `/listings/${l.slug}`;
 pages.push({
   route: "/",
   file: "index.html",
-  title: "Ferry CRE · Nassau County Commercial Real Estate · Antoinette Ferry",
+  title: "BHHS Heymann Williams Commercial · Nassau County Commercial Real Estate · Antoinette Ferry",
   description:
     "Commercial sales and leasing across Nassau County, Florida — Fernandina Beach, Amelia Island, Yulee, and Callahan. Antoinette Ferry, BHHS Heymann Williams Realty.",
   jsonLd: { "@context": "https://schema.org", "@graph": [AGENT_LD] },
   body: `<h1>Nassau County commercial real estate</h1>
 <p>${esc(profile.name)} is ${esc(profile.title)} at ${esc(profile.brokerageShort)} — the county's dedicated commercial practice. Sales, leasing, tenant and landlord representation across Fernandina Beach, Amelia Island, Yulee, and Callahan.</p>
 <h2>Current listings</h2>
-<ul>${listings.map((l) => `<li><a href="${listingPath(l)}" style="color:#c98cad">${esc(l.address)}, ${esc(l.city)}</a> — ${esc(TX_LABEL[l.transaction])}, ${esc(USE_LABEL[l.useType])}, ${esc(listingPriceLine(l))}</li>`).join("")}</ul>
+<ul>${listings.map((l) => `<li><a href="${listingPath(l)}" style="color:#670038">${esc(l.address)}, ${esc(l.city)}</a> — ${esc(TX_LABEL[l.transaction])}, ${esc(USE_LABEL[l.useType])}, ${esc(listingPriceLine(l))}</li>`).join("")}</ul>
 <h2>Markets</h2>
-<ul>${markets.map((m) => `<li><a href="${marketPath(m)}" style="color:#c98cad">${esc(m.h1)}</a> — ${esc(m.tagline)}</li>`).join("")}</ul>
+<ul>${markets.map((m) => `<li><a href="${marketPath(m)}" style="color:#670038">${esc(m.h1)}</a> — ${esc(m.tagline)}</li>`).join("")}</ul>
 <h2>Services</h2>
-<p><a href="/services" style="color:#c98cad">Tenant representation, landlord representation, investment sales, leasing, and site selection</a> — one commercial practice, both sides of every table.</p>
+<p><a href="/services" style="color:#670038">Tenant representation, landlord representation, investment sales, leasing, and site selection</a> — one commercial practice, both sides of every table.</p>
 ${footerHtml}`,
 });
 
 // Listings index
 pages.push({
   route: "/listings",
-  title: "Commercial Listings · Nassau County FL · Ferry CRE",
+  title: "Commercial Listings · Nassau County FL · BHHS Heymann Williams Commercial",
   description:
     "Current commercial listings across Nassau County — retail, office, industrial, medical, and land, with traffic counts, frontage, and zoning on every record.",
   jsonLd: {
@@ -247,12 +249,12 @@ pages.push({
     "@type": "CollectionPage",
     name: "Nassau County Commercial Listings",
     url: `${ORIGIN}/listings`,
-    breadcrumb: crumbs([["Ferry CRE", "/"], ["Listings", "/listings"]]),
+    breadcrumb: crumbs([["Home", "/"], ["Listings", "/listings"]]),
     publisher: AGENT_LD,
   },
   body: `<h1>Current commercial listings</h1>
 <p>Every record carries the commercial fields that matter: traffic counts with their FDOT citation, frontage, ingress, zoning, power, and tenancy.</p>
-<ul>${listings.map((l) => `<li><a href="${listingPath(l)}" style="color:#c98cad">${esc(l.headline)}</a><br/>${esc(l.address)}, ${esc(l.city)} — ${esc(TX_LABEL[l.transaction])} · ${esc(USE_LABEL[l.useType])} · ${esc(listingPriceLine(l))}</li>`).join("")}</ul>
+<ul>${listings.map((l) => `<li><a href="${listingPath(l)}" style="color:#670038">${esc(l.headline)}</a><br/>${esc(l.address)}, ${esc(l.city)} — ${esc(TX_LABEL[l.transaction])} · ${esc(USE_LABEL[l.useType])} · ${esc(listingPriceLine(l))}</li>`).join("")}</ul>
 ${footerHtml}`,
 });
 
@@ -262,7 +264,7 @@ for (const l of listings) {
   pages.push({
     route: listingPath(l),
     noindex: SAMPLE,
-    title: `${l.address}, ${l.city} FL — ${TX_LABEL[l.transaction]} ${USE_LABEL[l.useType]} · Ferry CRE`,
+    title: `${l.address}, ${l.city} FL — ${TX_LABEL[l.transaction]} ${USE_LABEL[l.useType]} · BHHS Heymann Williams Commercial`,
     description: l.summary,
     jsonLd: {
       "@context": "https://schema.org",
@@ -287,11 +289,11 @@ for (const l of listings) {
           },
           ...(l.salePrice ? { offers: { "@type": "Offer", price: l.salePrice, priceCurrency: "USD" } } : {}),
         },
-        crumbs([["Ferry CRE", "/"], ["Listings", "/listings"], [l.address, listingPath(l)]]),
+        crumbs([["Home", "/"], ["Listings", "/listings"], [l.address, listingPath(l)]]),
         AGENT_LD,
       ],
     },
-    body: `<nav><a href="/listings" style="color:#c98cad">Listings</a></nav>
+    body: `<nav><a href="/listings" style="color:#670038">Listings</a></nav>
 <h1>${esc(l.headline)}</h1>
 <p><strong>${esc(l.address)}, ${esc(l.city)}, ${esc(l.state)} ${esc(l.zip)}</strong> — ${esc(TX_LABEL[l.transaction])} · ${esc(USE_LABEL[l.useType])}</p>
 <p>${esc(l.summary)}</p>
@@ -313,7 +315,7 @@ for (const m of markets) {
   const related = listings.filter((l) => m.cities.map((c) => c.toLowerCase()).includes(l.city.toLowerCase()));
   pages.push({
     route: marketPath(m),
-    title: `${m.h1} · Ferry CRE`,
+    title: `${m.h1} · BHHS Heymann Williams Commercial`,
     description: m.tagline,
     jsonLd: {
       "@context": "https://schema.org",
@@ -330,11 +332,11 @@ for (const m of markets) {
           "@type": "FAQPage",
           mainEntity: m.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
         },
-        crumbs([["Ferry CRE", "/"], [m.name, marketPath(m)]]),
+        crumbs([["Home", "/"], [m.name, marketPath(m)]]),
         { ...AGENT_LD, "@type": "LocalBusiness", "@id": `${ORIGIN}${marketPath(m)}#business`, areaServed: `${m.name}, Florida`, priceRange: "$$$" },
       ],
     },
-    body: `<nav><a href="/" style="color:#c98cad">Ferry CRE</a></nav>
+    body: `<nav><a href="/" style="color:#670038">Home</a></nav>
 <h1>${esc(m.h1)}</h1>
 <p><em>${esc(m.tagline)}</em></p>
 <p>${esc(m.intro)}</p>
@@ -342,11 +344,11 @@ for (const m of markets) {
 <p>${m.corridors.map(esc).join(" · ")}</p>
 <h2>What trades here</h2>
 <p>${m.useTypes.map((u) => esc(USE_LABEL[u])).join(" · ")}</p>
-${related.length ? `<h2>Current listings in ${esc(m.name)}</h2><ul>${related.map((l) => `<li><a href="${listingPath(l)}" style="color:#c98cad">${esc(l.address)}, ${esc(l.city)}</a> — ${esc(TX_LABEL[l.transaction])} · ${esc(listingPriceLine(l))}</li>`).join("")}</ul>` : ""}
+${related.length ? `<h2>Current listings in ${esc(m.name)}</h2><ul>${related.map((l) => `<li><a href="${listingPath(l)}" style="color:#670038">${esc(l.address)}, ${esc(l.city)}</a> — ${esc(TX_LABEL[l.transaction])} · ${esc(listingPriceLine(l))}</li>`).join("")}</ul>` : ""}
 <h2>Buyer &amp; tenant questions</h2>
 ${m.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join("\n")}
 <h2>Other Nassau County markets</h2>
-<ul>${markets.filter((x) => x.slug !== m.slug).map((x) => `<li><a href="${marketPath(x)}" style="color:#c98cad">${esc(x.h1)}</a></li>`).join("")}</ul>
+<ul>${markets.filter((x) => x.slug !== m.slug).map((x) => `<li><a href="${marketPath(x)}" style="color:#670038">${esc(x.h1)}</a></li>`).join("")}</ul>
 ${footerHtml}`,
   });
 }
@@ -354,13 +356,13 @@ ${footerHtml}`,
 // Services
 pages.push({
   route: "/services",
-  title: "Commercial Services · Tenant Rep, Landlord Rep, Investment Sales · Ferry CRE",
+  title: "Commercial Services · Tenant Rep, Landlord Rep, Investment Sales · BHHS Heymann Williams Commercial",
   description: "Tenant representation, landlord representation, investment sales, leasing, and site selection across Nassau County, Florida.",
   jsonLd: {
     "@context": "https://schema.org",
     "@graph": [
       { ...AGENT_LD, makesOffer: ["Tenant representation", "Landlord representation", "Investment sales", "Commercial leasing", "Site selection"].map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s } })) },
-      crumbs([["Ferry CRE", "/"], ["Services", "/services"]]),
+      crumbs([["Home", "/"], ["Services", "/services"]]),
     ],
   },
   body: `<h1>Commercial services</h1>
@@ -376,25 +378,25 @@ ${footerHtml}`,
 // About
 pages.push({
   route: "/about",
-  title: `About ${profile.name} · ${profile.title} · Ferry CRE`,
+  title: `About ${profile.name} · ${profile.title} · BHHS Heymann Williams Commercial`,
   description: `${profile.name} is ${profile.title} at ${profile.brokerage} in Fernandina Beach, Florida — commercial sales and leasing across Nassau County.`,
-  jsonLd: { "@context": "https://schema.org", "@graph": [AGENT_LD, crumbs([["Ferry CRE", "/"], ["About", "/about"]])] },
+  jsonLd: { "@context": "https://schema.org", "@graph": [AGENT_LD, crumbs([["Home", "/"], ["About", "/about"]])] },
   body: `<h1>${esc(profile.name)}</h1>
 <p><strong>${esc(profile.title)}</strong> · ${esc(profile.brokerage)}</p>
 <p>Commercial sales and leasing across Nassau County, Florida. ${esc(profile.memberships.join(". "))}.</p>
-<p>Direct: ${esc(profile.phone)} · <a href="mailto:${esc(profile.email)}" style="color:#c98cad">${esc(profile.email)}</a></p>
+<p>Direct: ${esc(profile.phone)} · <a href="mailto:${esc(profile.email)}" style="color:#670038">${esc(profile.email)}</a></p>
 ${footerHtml}`,
 });
 
 // Contact
 pages.push({
   route: "/contact",
-  title: "Contact · Ferry CRE · Antoinette Ferry",
+  title: "Contact · BHHS Heymann Williams Commercial · Antoinette Ferry",
   description: `Reach ${profile.name} directly: ${profile.phone}, ${profile.email}. Commercial sales and leasing across Nassau County, Florida.`,
-  jsonLd: { "@context": "https://schema.org", "@graph": [AGENT_LD, crumbs([["Ferry CRE", "/"], ["Contact", "/contact"]])] },
+  jsonLd: { "@context": "https://schema.org", "@graph": [AGENT_LD, crumbs([["Home", "/"], ["Contact", "/contact"]])] },
   body: `<h1>Contact</h1>
 <p>${esc(profile.name)}, ${esc(profile.title)}, ${esc(profile.brokerageShort)}.</p>
-<p>Direct: ${esc(profile.phone)}<br/>Email: <a href="mailto:${esc(profile.email)}" style="color:#c98cad">${esc(profile.email)}</a><br/>Office: ${esc(profile.officeAddress)} · ${esc(profile.officePhone)}</p>
+<p>Direct: ${esc(profile.phone)}<br/>Email: <a href="mailto:${esc(profile.email)}" style="color:#670038">${esc(profile.email)}</a><br/>Office: ${esc(profile.officeAddress)} · ${esc(profile.officePhone)}</p>
 ${footerHtml}`,
 });
 

@@ -13,9 +13,10 @@ import { ANCHORS, CORRIDORS, HOME_VIEW, MAX_BOUNDS, ZOOM_RANGE, milesBetween } f
 import { allListings } from "../lib/listingsSource";
 import { record } from "../lib/attunement";
 import { useCanonical, useDocumentTitle } from "../lib/seo";
+import { BRAND } from "../lib/site";
 
 /**
- * The instrument. A commercial buyer reads a map for answers a residential
+ * The map. A commercial buyer reads a map for answers a residential
  * buyer never asks: what is the traffic on that frontage, where is the
  * ingress, who are the neighbors, how far to the interchange. This surface is
  * lazy-loaded behind its own route boundary — the prerender never touches it
@@ -27,8 +28,8 @@ const silk = (t: number) => 1 - Math.pow(1 - t, 3);
 
 export default function Explore() {
   useDocumentTitle(
-    "Explore the County · Ferry CRE",
-    "Walk Nassau County's commercial corridors: listings, traffic counts, frontage, and drive distances on a living map."
+    `Explore the County · ${BRAND}`,
+    "Nassau County commercial listings, traffic counts, frontage, and drive distances on one map."
   );
   useCanonical("/explore");
 
@@ -89,7 +90,7 @@ export default function Explore() {
       listings.forEach((l) => {
         const pin = document.createElement("button");
         pin.className = "ferry-pin ferry-pin-lg";
-        pin.setAttribute("aria-label", `${l.address} — open details`);
+        pin.setAttribute("aria-label", `Open details for ${l.address}`);
         pin.addEventListener("click", () => setSelected(l));
         new maplibregl.Marker({ element: pin }).setLngLat([l.lon, l.lat]).addTo(map);
       });
@@ -113,7 +114,7 @@ export default function Explore() {
       ANCHORS.forEach((a) => label(a.name, a.lat, a.lon, "plate-anchor", 9.4));
 
       // lift the veil on load — or after a beat if a tile host stalls, so the
-      // chrome, rail, and instrument panel are never held hostage by imagery
+      // chrome, rail, and property panel are never held hostage by imagery
       const lift = () => {
         if (!disposed) setReady(true);
       };
@@ -131,7 +132,7 @@ export default function Explore() {
         try {
           if (!map.areTilesLoaded() || !map.isStyleLoaded()) {
             setMapTrouble(
-              (prev) => prev ?? "Imagery is slow or unavailable — check the browser console for [ferrycre/map] lines."
+              (prev) => prev ?? "Imagery is slow to load right now. Give it a moment."
             );
           }
         } catch {
@@ -252,7 +253,7 @@ export default function Explore() {
   const sel = selected;
 
   return (
-    <div className="fixed inset-0 bg-paper">
+    <div className="on-ink fixed inset-0 bg-ink text-fg">
       {/* explicit height, not absolute+inset: maplibre's own stylesheet forces
           position:relative on this element, which collapses an inset-sized box
           to zero height (the "black map" bug) */}
@@ -260,37 +261,42 @@ export default function Explore() {
 
       {/* top chrome */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4">
-        <Link to="/" className="glass pointer-events-auto flex items-baseline gap-2 px-4 py-2">
-          <span className="font-display text-base font-semibold">FERRY</span>
-          <span className="text-base font-light tracking-widest text-signal-soft">CRE</span>
+        <Link to="/" className="pane-ink pointer-events-auto flex items-center px-3 py-2.5" aria-label={`${BRAND} home`}>
+          <img
+            src="/brand/hw-name-lockup-cream.svg"
+            alt="Berkshire Hathaway HomeServices Heymann Williams Realty"
+            width={875}
+            height={195}
+            className="h-8 w-auto"
+          />
         </Link>
         <div className="pointer-events-auto flex gap-2">
           {walking && (
-            <button type="button" onClick={endWalk} className="btn-signal px-4 py-2 text-sm">
+            <button type="button" onClick={endWalk} className="btn-primary px-4 py-2 text-sm">
               End walk
             </button>
           )}
-          <Link to="/listings" className="btn-ghost px-4 py-2 text-sm">
+          <Link to="/listings" className="btn-outline px-4 py-2 text-sm">
             List view
           </Link>
         </div>
       </div>
 
       {!ready && (
-        <div className="absolute inset-0 z-20 grid place-items-center bg-paper">
-          <p className="text-sm text-faint">Preparing the county…</p>
+        <div className="absolute inset-0 z-20 grid place-items-center bg-ink">
+          <p className="text-sm text-fg-3">Loading the map…</p>
         </div>
       )}
 
       {mapTrouble && (
-        <p className="glass pointer-events-none absolute left-1/2 top-16 z-10 max-w-md -translate-x-1/2 px-4 py-2 text-center text-xs text-stone">
+        <p className="pane-ink pointer-events-none absolute left-1/2 top-16 z-10 max-w-md -translate-x-1/2 px-4 py-2 text-center text-xs text-fg-2">
           {mapTrouble}
         </p>
       )}
 
       {/* attribution while photoreal renders (required by Google's terms) */}
       {photoreal && (
-        <span className="absolute bottom-1 left-1 z-10 rounded bg-paper/70 px-1.5 py-0.5 text-[10px] text-stone">
+        <span className="absolute bottom-1 left-1 z-10 rounded bg-ink/80 px-1.5 py-0.5 text-[10px] text-fg-2">
           © Google
         </span>
       )}
@@ -306,29 +312,29 @@ export default function Explore() {
             key={l.id}
             type="button"
             onClick={() => flyTo(l)}
-            className={`glass min-w-[220px] shrink-0 p-3.5 text-left transition-colors sm:min-w-0 ${
-              sel?.id === l.id ? "outline outline-1 outline-signal" : ""
+            className={`pane-ink min-w-[220px] shrink-0 p-3.5 text-left transition-colors sm:min-w-0 ${
+              sel?.id === l.id ? "outline outline-1 outline-cabernet-tint" : ""
             }`}
           >
-            <p className="text-xs text-faint">
+            <p className="text-xs text-fg-3">
               {USE_TYPE_LABEL[l.useType]} · {TRANSACTION_LABEL[l.transaction]}
             </p>
-            <p className="mt-0.5 truncate text-sm font-medium text-bone">{l.address}</p>
-            <p className="mt-0.5 text-xs text-stone">{priceLine(l)}</p>
+            <p className="mt-0.5 truncate text-sm font-medium text-fg">{l.address}</p>
+            <p className="mt-0.5 text-xs text-fg-2">{priceLine(l)}</p>
           </button>
         ))}
       </div>
 
-      {/* the position instrument — right panel on desktop, bottom sheet on mobile */}
+      {/* the property panel — right panel on desktop, bottom sheet on mobile */}
       {sel && (
-        <aside className="glass-deep absolute z-10 overflow-y-auto p-5 max-sm:inset-x-2 max-sm:bottom-2 max-sm:max-h-[62vh] sm:right-4 sm:top-20 sm:max-h-[calc(100vh-7rem)] sm:w-96 sm:p-6">
+        <aside className="pane-ink absolute z-10 overflow-y-auto p-5 max-sm:inset-x-2 max-sm:bottom-2 max-sm:max-h-[62vh] sm:right-4 sm:top-20 sm:max-h-[calc(100vh-7rem)] sm:w-96 sm:p-6">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="eyebrow">
                 {USE_TYPE_LABEL[sel.useType]} · {TRANSACTION_LABEL[sel.transaction]}
               </p>
               <h2 className="mt-1.5 text-lg font-medium leading-snug">{sel.address}</h2>
-              <p className="text-sm text-stone">
+              <p className="text-sm text-fg-2">
                 {sel.city} · {priceLine(sel)} · {sizeLine(sel)}
               </p>
             </div>
@@ -336,7 +342,7 @@ export default function Explore() {
               type="button"
               onClick={() => setSelected(null)}
               aria-label="Close panel"
-              className="btn-ghost h-8 w-8 shrink-0 text-sm"
+              className="btn-outline h-8 w-8 shrink-0 text-sm"
             >
               ✕
             </button>
@@ -398,14 +404,14 @@ export default function Explore() {
           )}
 
           {sel.trafficCount && (
-            <p className="mt-3 text-[11px] leading-relaxed text-faint">Traffic source: {sel.trafficCountSource}.</p>
+            <p className="mt-3 text-[11px] leading-relaxed text-fg-3">Traffic source: {sel.trafficCountSource}.</p>
           )}
 
           <div className="mt-5 flex gap-2">
-            <button type="button" onClick={() => startWalk(sel)} className="btn-signal flex-1 px-4 py-2.5 text-sm">
-              Walk the street
+            <button type="button" onClick={() => startWalk(sel)} className="btn-primary flex-1 px-4 py-2.5 text-sm">
+              Street level
             </button>
-            <Link to={`/listings/${sel.slug}`} className="btn-ghost flex-1 px-4 py-2.5 text-sm">
+            <Link to={`/listings/${sel.slug}`} className="btn-outline flex-1 px-4 py-2.5 text-sm">
               Full listing
             </Link>
           </div>

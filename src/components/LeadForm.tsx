@@ -73,33 +73,33 @@ export default function LeadForm({ context }: { context?: Record<string, string>
 
   if (phase === "sent") {
     return (
-      <div className="glass-deep p-8 text-center">
+      <div className="pane p-8 text-center">
         <p className="text-xl font-medium">Received.</p>
-        <p className="mt-2 text-stone">
-          Antoinette will reach out directly — usually the same business day.
+        <p className="mt-2 text-fg-2">
+          Antoinette will reach out directly, usually the same business day.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={submit} className="glass-deep grid gap-4 p-6 sm:p-8" noValidate>
+    <form onSubmit={submit} className="pane grid gap-4 p-6 sm:p-8" noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           First name
-          <input name="firstName" required autoComplete="given-name" className="input-glass" />
+          <input name="firstName" required autoComplete="given-name" className="field" />
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Last name
-          <input name="lastName" required autoComplete="family-name" className="input-glass" />
+          <input name="lastName" required autoComplete="family-name" className="field" />
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Email
-          <input name="email" type="email" autoComplete="email" className="input-glass" />
+          <input name="email" type="email" autoComplete="email" className="field" />
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Phone
-          <input name="phone" type="tel" autoComplete="tel" className="input-glass" />
+          <input name="phone" type="tel" autoComplete="tel" className="field" />
         </label>
       </div>
 
@@ -112,9 +112,9 @@ export default function LeadForm({ context }: { context?: Record<string, string>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           I want to
-          <select name="goal" className="input-glass" defaultValue="">
+          <select name="goal" className="field" defaultValue="">
             <option value="" disabled>
               Select…
             </option>
@@ -123,9 +123,9 @@ export default function LeadForm({ context }: { context?: Record<string, string>
             ))}
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Property type
-          <select name="useType" className="input-glass" defaultValue="">
+          <select name="useType" className="field" defaultValue="">
             <option value="" disabled>
               Select…
             </option>
@@ -134,9 +134,9 @@ export default function LeadForm({ context }: { context?: Record<string, string>
             ))}
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Size range
-          <select name="sizeRange" className="input-glass" defaultValue="">
+          <select name="sizeRange" className="field" defaultValue="">
             <option value="" disabled>
               Select…
             </option>
@@ -145,9 +145,9 @@ export default function LeadForm({ context }: { context?: Record<string, string>
             ))}
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm text-stone">
+        <label className="grid gap-1.5 text-sm text-fg-2">
           Timeline
-          <select name="timeline" className="input-glass" defaultValue="">
+          <select name="timeline" className="field" defaultValue="">
             <option value="" disabled>
               Select…
             </option>
@@ -158,9 +158,9 @@ export default function LeadForm({ context }: { context?: Record<string, string>
         </label>
       </div>
 
-      <label className="grid gap-1.5 text-sm text-stone">
+      <label className="grid gap-1.5 text-sm text-fg-2">
         Submarket
-        <select name="submarket" className="input-glass" defaultValue="">
+        <select name="submarket" className="field" defaultValue="">
           <option value="" disabled>
             Select…
           </option>
@@ -170,20 +170,20 @@ export default function LeadForm({ context }: { context?: Record<string, string>
         </select>
       </label>
 
-      <label className="grid gap-1.5 text-sm text-stone">
+      <label className="grid gap-1.5 text-sm text-fg-2">
         Anything else
-        <textarea name="message" rows={3} className="input-glass" placeholder="Requirements, questions, or a property you have in mind." />
+        <textarea name="message" rows={3} className="field" placeholder="Requirements, questions, or a property you have in mind." />
       </label>
 
-      <label className="flex items-start gap-3 text-xs leading-relaxed text-faint">
-        <input name="consent" type="checkbox" required className="mt-0.5 h-4 w-4 accent-[#a85484]" />
+      <label className="flex items-start gap-3 text-xs leading-relaxed text-fg-3">
+        <input name="consent" type="checkbox" required className="mt-0.5 h-4 w-4 accent-cabernet" />
         <span>{SITE.consentText}</span>
       </label>
 
-      {error && <p className="text-sm text-signal-soft">{error}</p>}
+      {error && <p className="text-sm text-accent">{error}</p>}
       {phase === "failed" && (
-        <p className="text-sm text-signal-soft">
-          The form couldn't send just now — call{" "}
+        <p className="text-sm text-accent">
+          The form couldn't send just now. Call{" "}
           <a href={telHref} className="underline">
             {SITE.phone}
           </a>{" "}
@@ -195,7 +195,7 @@ export default function LeadForm({ context }: { context?: Record<string, string>
         </p>
       )}
 
-      <button type="submit" disabled={phase === "sending"} className="btn-signal px-6 py-3 text-sm disabled:opacity-60">
+      <button type="submit" disabled={phase === "sending"} className="btn-primary px-6 py-3 text-sm disabled:opacity-60">
         {phase === "sending" ? "Sending…" : "Start the conversation"}
       </button>
     </form>

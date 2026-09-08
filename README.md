@@ -1,4 +1,4 @@
-# ferrycre.com — Ferry CRE
+# ferrycre.com — BHHS Heymann Williams Commercial
 
 Nassau County commercial real estate. Antoinette Ferry, Director of Commercial
 Sales & Leasing, BHHS Heymann Williams Realty. Her domain, her code, her lead
@@ -18,15 +18,15 @@ forwarding — it breaks ad destination verification).
 
 ## The shape
 
-Six listings, hand-authored — a small, curated, high-value book, which is a
-different design problem than a portal. Nobody constructs a search to find six
-properties; the site puts everything on the table and makes each property page
-the deepest document about that property on the internet.
+Four listings, hand-authored. A small, curated book, which is a different
+design problem than a portal. Nobody builds a search to find four properties;
+the site puts everything on the table and makes each property page the
+deepest document about that property on the internet.
 
 | | |
 |---|---|
 | `src/lib/commercial.ts` | the commercial domain model — written from scratch; no residential assumptions |
-| `src/data/listings.json` | the six records (**sample data until hers land** — see below) |
+| `src/data/listings.json` | the four current records |
 | `src/data/markets.json` | the five geo squeeze pages, unique authored prose each |
 | `src/data/profile.json` | her identity, contact, license, consent language — editable at `/admin` |
 | `src/lib/listingsSource.ts` | one switch point for listing data; a Buildout/RESO adapter drops in later |
@@ -55,13 +55,13 @@ excluded from the sitemap, and the site shows a discreet preview notice.
 2. Bio and service copy **in her own voice** (`bioConfirmed: true` turns it on)
 3. FL license number (`licenseConfirmed: true`) — required on advertising
 4. Exact displayed title confirmation
-5. Photography of the actual properties (SVG placeholders stand in)
+5. Photography for the three listings still on SVG placeholders
 6. `BOLDTRAIL_DROPBOX_EMAIL` + a mail transport in the Netlify env
 
 ## Performance rules (non-negotiable)
 
-- Sub-second FCP on prerendered routes; system font stack; zero third-party
-  scripts above the fold
+- Sub-second FCP on prerendered routes; self-hosted variable fonts (two files,
+  `font-display: swap`, no font CDN); zero third-party scripts above the fold
 - maplibre and the deck.gl photoreal stack are code-split (`manualChunks`) and
   dynamic-imported; they must never land in the main bundle
 - `/explore` is an instrument, not a document: lazy, unprerendered, unindexed

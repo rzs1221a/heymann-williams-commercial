@@ -1,46 +1,57 @@
 import LeadForm from "../components/LeadForm";
-import { SITE, telHref, mailHref } from "../lib/site";
+import { BRAND, SITE, telHref, mailHref } from "../lib/site";
 import { useCanonical, useDocumentTitle } from "../lib/seo";
 
 export default function Contact() {
   useDocumentTitle(
-    "Contact · Ferry CRE · Antoinette Ferry",
+    `Contact · ${BRAND} · Antoinette Ferry`,
     `Reach ${SITE.name} directly: ${SITE.phone}, ${SITE.email}. Commercial sales and leasing across Nassau County, Florida.`
   );
   useCanonical("/contact");
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-16 pt-40">
+    <section className="wrap section">
       <p className="eyebrow">Contact</p>
-      <h1 className="font-display mt-2 text-3xl font-semibold sm:text-4xl">
-        Requirements welcome. Off-market conversations too.
-      </h1>
-      <div className="mt-10 grid gap-10 lg:grid-cols-[380px_1fr]">
-        <div>
-          <div className="glass p-7">
-            <p className="text-lg font-medium">{SITE.name}</p>
-            <p className="mt-1 text-sm text-signal-soft">{SITE.title}</p>
-            <p className="mt-4 text-sm text-stone">
-              <a href={telHref} className="block py-1 hover:text-bone">
-                {SITE.phone} — direct
-              </a>
-              <a href={mailHref} className="block py-1 hover:text-bone">
-                {SITE.email}
-              </a>
-            </p>
-            <p className="mt-4 border-t border-white/10 pt-4 text-sm text-stone">
-              {SITE.brokerageShort}
-              <br />
-              {SITE.officeAddress}
-              <br />
-              Office {SITE.officePhone}
-            </p>
-          </div>
-          <p className="mt-4 text-xs leading-relaxed text-faint">
+      <h1 className="t-page mt-4 max-w-3xl">Requirements welcome. Off-market conversations too.</h1>
+      <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-x-6">
+        <div className="lg:col-span-5">
+          <dl className="rule-strong">
+            <div className="spec-row">
+              <dt>Direct</dt>
+              <dd>
+                <a href={telHref} className="hover:text-accent">
+                  {SITE.phone}
+                </a>
+              </dd>
+            </div>
+            <div className="spec-row">
+              <dt>Email</dt>
+              <dd>
+                <a href={mailHref} className="hover:text-accent">
+                  {SITE.email}
+                </a>
+              </dd>
+            </div>
+            <div className="spec-row">
+              <dt>Brokerage</dt>
+              <dd className="max-w-[16rem]">{SITE.brokerageShort}</dd>
+            </div>
+            <div className="spec-row">
+              <dt>Office</dt>
+              <dd className="max-w-[16rem]">{SITE.officeAddress}</dd>
+            </div>
+            <div className="spec-row">
+              <dt>Office phone</dt>
+              <dd>{SITE.officePhone}</dd>
+            </div>
+          </dl>
+          <p className="reading mt-6 max-w-md text-fg-2">
             Calls and texts go to her directly, not a front desk. If you're standing on a property
-            right now, call — the traffic count can wait.
+            right now, just call. The traffic count can wait.
           </p>
         </div>
-        <LeadForm />
+        <div className="lg:col-span-7">
+          <LeadForm />
+        </div>
       </div>
     </section>
   );

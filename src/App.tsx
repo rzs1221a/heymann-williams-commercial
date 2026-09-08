@@ -14,11 +14,11 @@ const Contact = lazy(() => import("./routes/Contact"));
 
 function NotFound() {
   return (
-    <section className="mx-auto max-w-3xl px-5 pb-24 pt-44 text-center">
+    <section className="wrap section text-center">
       <p className="eyebrow mb-4">404</p>
-      <h1 className="text-3xl font-medium">That page isn't in the inventory.</h1>
-      <Link to="/" className="btn-signal mt-8 inline-flex px-6 py-3 text-sm">
-        Back to the county
+      <h1 className="t-page">That page isn't in the inventory.</h1>
+      <Link to="/" className="btn-primary mt-8 inline-flex px-6 py-3 text-sm">
+        Home
       </Link>
     </section>
   );

@@ -6,7 +6,7 @@
  */
 import profile from "../data/profile.json";
 
-export const BRAND = "Ferry CRE";
+export const BRAND = "BHHS Heymann Williams Commercial";
 
 export const SITE = profile;
 

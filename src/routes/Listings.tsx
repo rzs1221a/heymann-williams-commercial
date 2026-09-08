@@ -1,8 +1,8 @@
 import { lazy, Suspense, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ListingCard from "../components/ListingCard";
+import ListingLedger from "../components/ListingLedger";
 import { allListings } from "../lib/listingsSource";
-import { SITE } from "../lib/site";
+import { BRAND, SITE } from "../lib/site";
 import { USE_TYPE_LABEL, type Transaction, type UseType } from "../lib/commercial";
 import { describeCommercial, matchesCommercial, parseCommercial, criteriaIsEmpty } from "../lib/intent";
 import { record } from "../lib/attunement";
@@ -18,8 +18,8 @@ const TX_CHIPS: { id: Transaction | "all"; label: string }[] = [
 
 export default function Listings() {
   useDocumentTitle(
-    "Commercial Listings · Nassau County FL · Ferry CRE",
-    "Current commercial listings across Nassau County — retail, office, industrial, medical, and land, with traffic counts, frontage, and zoning on every record."
+    `Commercial Listings · Nassau County FL · ${BRAND}`,
+    "Current commercial listings across Nassau County: retail, office, industrial, medical, and land, each with traffic counts, frontage, and zoning."
   );
   useCanonical("/listings");
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function Listings() {
   const [tx, setTx] = useState<Transaction | "all">("all");
   const [uses, setUses] = useState<UseType[]>([]);
   const [q, setQ] = useState("");
-  // the chart is on the table by default where there's room for it
+  // the map is shown by default where there's room for it
   const [showMap, setShowMap] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches
   );
@@ -58,24 +58,24 @@ export default function Listings() {
   }, [listings, tx, uses, criteria]);
 
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-16 pt-40">
+    <section className="wrap section">
       <p className="eyebrow">Inventory</p>
-      <h1 className="font-display mt-2 text-3xl font-semibold sm:text-4xl">Current listings</h1>
-      <p className="mt-3 max-w-2xl text-stone">
-        A small, curated book of business — every record carries the commercial fields that matter,
-        from zoning and frontage to tenancy, and nothing that hasn't been verified.
+      <h1 className="t-page mt-4">Current listings.</h1>
+      <p className="reading-lg mt-6 max-w-2xl text-fg-2">
+        Every listing includes what a commercial buyer checks first: zoning, frontage, traffic,
+        and tenancy. Nothing here is unverified.
       </p>
-      <div className="mt-5 flex flex-wrap gap-3">
-        <a href={SITE.mlsFeedPage} rel="noopener" className="btn-signal px-5 py-2.5 text-sm">
+      <div className="mt-8 flex flex-wrap gap-3">
+        <a href={SITE.mlsFeedPage} rel="noopener" className="btn-primary px-5 py-2.5 text-sm">
           View all my listings on the MLS ↗
         </a>
-        <a href={SITE.commercialSearch} rel="noopener" className="btn-ghost px-5 py-2.5 text-sm">
+        <a href={SITE.commercialSearch} rel="noopener" className="btn-outline px-5 py-2.5 text-sm">
           Search all BHHS commercial ↗
         </a>
       </div>
 
       {/* plain-phrase search — type the way you talk */}
-      <div className="mt-8 max-w-2xl">
+      <div className="mt-10 max-w-2xl">
         <input
           value={q}
           onChange={(e) => {
@@ -83,11 +83,11 @@ export default function Listings() {
             if (e.target.value.length > 3) record({ t: "search", q: e.target.value });
           }}
           placeholder='Try "retail on 200 under 1.5m" or "warehouse lease near 95"'
-          className="input-glass py-3.5"
+          className="field py-3.5"
           aria-label="Search listings in plain language"
         />
         {q.trim() && (
-          <p className="mt-2 text-sm text-faint">{describeCommercial(criteria, filtered.length)}</p>
+          <p className="mt-2 text-sm text-fg-3">{describeCommercial(criteria, filtered.length)}</p>
         )}
       </div>
 
@@ -98,7 +98,7 @@ export default function Listings() {
             {c.label}
           </button>
         ))}
-        <span className="mx-1 hidden h-4 w-px bg-white/15 sm:block" />
+        <span className="mx-1 hidden h-4 w-px bg-line sm:block" />
         {usedTypes.map((u) => (
           <button
             key={u}
@@ -117,23 +117,21 @@ export default function Listings() {
 
       {showMap && (
         <div className="mt-6">
-          <Suspense fallback={<div className="glass h-[380px] animate-pulse" />}>
+          <Suspense fallback={<div className="h-[380px] rounded border border-line bg-ground-2" />}>
             <MiniMap listings={filtered} onOpen={(slug) => navigate(`/listings/${slug}`)} />
           </Suspense>
         </div>
       )}
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((l) => (
-          <ListingCard key={l.id} listing={l} />
-        ))}
+      <div className="mt-10">
+        <ListingLedger listings={filtered} />
       </div>
       {filtered.length === 0 && (
-        <div className="glass-deep mt-8 p-8 text-center">
-          <p className="text-lg">Nothing in the current book fits that.</p>
-          <p className="mt-2 text-sm text-stone">
-            Much of Nassau County trades off-market. Tell Antoinette the requirement — she may
-            already know the owner.
+        <div className="pane mt-8 p-8 text-center">
+          <p className="t-sub">No current listing matches that.</p>
+          <p className="mt-2 text-sm text-fg-2">
+            Much of Nassau County trades off-market. Tell Antoinette what you're looking for. She
+            may already know the owner.
           </p>
         </div>
       )}

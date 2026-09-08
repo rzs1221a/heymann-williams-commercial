@@ -1,156 +1,190 @@
 import { Link } from "react-router-dom";
-import ListingCard from "../components/ListingCard";
+import ListingLedger from "../components/ListingLedger";
 import LeadForm from "../components/LeadForm";
+import Photo from "../components/Photo";
+import Reveal from "../components/Reveal";
 import { availableListings } from "../lib/listingsSource";
 import { markets } from "../lib/markets";
-import { SITE, telHref } from "../lib/site";
+import { BRAND, SITE, telHref, mailHref } from "../lib/site";
 import { useCanonical, useDocumentTitle } from "../lib/seo";
+
+const WHY = [
+  {
+    eyebrow: "Networks",
+    head: "Two MLS networks.",
+    body: "Member of realMLS and AINCAR, so every listing reaches both the mainland and the island.",
+  },
+  {
+    eyebrow: "Practice",
+    head: "Commercial only.",
+    body: "The firm's dedicated commercial desk, not a residential sideline. Zoning, lease structures, cap rates, and corridor data, every day.",
+  },
+  {
+    eyebrow: "Brokerage",
+    head: "Berkshire behind it.",
+    body: `${SITE.brokerageShort}, locally owned with the reach of the Berkshire Hathaway HomeServices network.`,
+  },
+];
 
 export default function Home() {
   useDocumentTitle(
-    "Ferry CRE · Nassau County Commercial Real Estate · Antoinette Ferry",
-    "Commercial sales and leasing across Nassau County, Florida — Fernandina Beach, Amelia Island, Yulee, and Callahan."
+    `${BRAND} · Nassau County Commercial Real Estate · Antoinette Ferry`,
+    "Commercial sales and leasing across Nassau County, Florida, including Fernandina Beach, Amelia Island, Yulee, and Callahan."
   );
   useCanonical("/");
   const listings = availableListings();
+  const submarkets = markets.filter((m) => m.slug !== "nassau-county-commercial-real-estate");
 
   return (
     <>
-      {/* her, her market, her inventory */}
-      <section className="mx-auto max-w-6xl px-5 pb-16 pt-40 sm:pt-44">
-        <p className="eyebrow">Nassau County · Florida</p>
-        <h1 className="font-display mt-4 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-          Commercial real estate, from the port to the interstate.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-stone">
-          {SITE.name} is {SITE.title} at {SITE.brokerageShort} — the county's dedicated commercial
-          practice. Sales, leasing, tenant and landlord representation across Fernandina Beach,
-          Amelia Island, Yulee, and Callahan.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href={SITE.mlsFeedPage} rel="noopener" className="btn-signal px-6 py-3 text-sm">
-            View all my listings ↗
-          </a>
-          <Link to="/listings" className="btn-ghost px-6 py-3 text-sm">
-            Featured commercial
-          </Link>
-          <a href={telHref} className="btn-ghost px-6 py-3 text-sm">
-            Call {SITE.phone}
-          </a>
+      {/* the hero: her, her market, one line — on ink */}
+      <section className="on-ink bg-ground text-fg">
+        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-x-6">
+          <div className="lg:col-span-8">
+            <p className="eyebrow">Nassau County · Florida</p>
+            <h1 className="t-hero mt-6">Commercial real estate, from the port to the interstate.</h1>
+            <p className="reading-lg mt-8 max-w-2xl text-fg-2">
+              {SITE.name} is {SITE.title} at {SITE.brokerageShort}, the county's dedicated commercial
+              practice. She handles sales, leasing, and tenant and landlord representation across
+              Fernandina Beach, Amelia Island, Yulee, and Callahan.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href={SITE.mlsFeedPage} rel="noopener" className="btn-primary px-6 py-3 text-sm">
+                View all my listings ↗
+              </a>
+              <Link to="/listings" className="btn-outline px-6 py-3 text-sm">
+                Current listings
+              </Link>
+              <a href={telHref} className="btn-outline px-6 py-3 text-sm">
+                Call {SITE.phone}
+              </a>
+            </div>
+            <img
+              src="/brand/hw-commercial-lockup-cream.svg"
+              alt="Berkshire Hathaway HomeServices Heymann Williams Realty"
+              width={874}
+              height={302}
+              className="mt-14 h-10 w-auto"
+            />
+          </div>
+          {SITE.portrait && (
+            <div className="flex items-end gap-5 lg:col-span-3 lg:col-start-10 lg:self-end">
+              <Photo
+                src={SITE.portrait}
+                alt={SITE.name}
+                widths={[320, 640]}
+                sizes="112px"
+                loading="eager"
+                width={112}
+                height={112}
+                className="h-28 w-28 shrink-0 rounded object-cover shadow-[0_24px_48px_-28px_rgb(0_0_0/0.6)]"
+              />
+              <div className="text-sm leading-snug">
+                <p className="font-medium text-fg">{SITE.name}</p>
+                <p className="mt-1 text-fg-3">{SITE.title}</p>
+                <a href={mailHref} className="mt-2 block text-accent hover:text-fg">
+                  {SITE.email}
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* the inventory — small, curated, high-value; every property answered in full */}
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="mb-6 flex items-end justify-between gap-4">
+      {/* the inventory — every listing, as a ledger */}
+      <Reveal as="section" className="wrap section">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Current inventory</p>
-            <h2 className="font-display mt-2 text-2xl font-semibold sm:text-3xl">
-              Every listing, answered in full.
-            </h2>
+            <h2 className="t-section mt-3">Every listing, in full.</h2>
           </div>
-          <a href={SITE.mlsFeedPage} rel="noopener" className="text-sm text-signal-soft hover:text-bone">
-            Live MLS feed — all listings →
+          <a href={SITE.mlsFeedPage} rel="noopener" className="text-sm text-accent hover:text-fg">
+            All listings on the MLS →
           </a>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {listings.slice(0, 6).map((l) => (
-            <ListingCard key={l.id} listing={l} />
-          ))}
-        </div>
-        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-faint">
-          Traffic counts, frontage, ingress, zoning, power, and drive times are on every property
-          page — the numbers a site selector pulls from three databases, already assembled. Then{" "}
-          <Link to="/explore" className="text-signal-soft hover:text-bone">
-            walk the street on the map
+        <ListingLedger listings={listings} />
+        <p className="reading mt-8 max-w-2xl text-fg-2">
+          Every property page already has the traffic counts, frontage, zoning, and drive times a
+          site selector needs. Then{" "}
+          <Link to="/explore" className="text-accent hover:text-fg">
+            see it on the map
           </Link>
           .
         </p>
-      </section>
+      </Reveal>
 
-      {/* the chart window — the section steps aside and the living background
-          shows through; the map IS the page here */}
-      <section className="relative mx-auto flex min-h-[52vh] max-w-6xl flex-col items-start justify-end px-5 py-12">
-        <div className="glass max-w-md p-6">
-          <p className="eyebrow">The county</p>
-          <h2 className="font-display mt-2 text-2xl font-semibold sm:text-3xl">
-            Every position on the chart behind this page.
-          </h2>
-          <p className="mt-2 text-sm leading-relaxed text-stone">
-            The marks are her current listings. The full instrument adds traffic counts, frontage,
-            drive distances, and the street-level walk.
-          </p>
-          <Link to="/explore" className="btn-signal mt-4 px-6 py-2.5 text-sm">
-            Open the instrument
-          </Link>
-        </div>
-      </section>
-
-      {/* the markets */}
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <p className="eyebrow">The submarkets</p>
-        <h2 className="font-display mt-2 max-w-2xl text-2xl font-semibold sm:text-3xl">
-          One county, four different commercial markets.
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {markets
-            .filter((m) => m.slug !== "nassau-county-commercial-real-estate")
-            .map((m) => (
-              <Link key={m.slug} to={`/${m.slug}`} className="glass block p-6 transition-transform duration-200 hover:-translate-y-0.5">
-                <h3 className="text-lg font-medium text-bone">{m.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-stone">{m.tagline}</p>
-                <p className="mt-3 text-xs text-faint">{m.corridors.slice(0, 3).join(" · ")}</p>
+      {/* the markets — an editorial index, not tiles */}
+      <Reveal as="section" className="wrap">
+        <div className="rule-strong section grid gap-10 lg:grid-cols-12 lg:gap-x-6">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-24">
+              <p className="eyebrow">The submarkets</p>
+              <h2 className="t-section mt-3">One county, four commercial markets.</h2>
+              <Link
+                to="/nassau-county-commercial-real-estate"
+                className="mt-6 inline-block text-sm text-accent hover:text-fg"
+              >
+                Read the county overview →
               </Link>
+            </div>
+          </div>
+          <ol className="lg:col-span-8">
+            {submarkets.map((m, i) => (
+              <li key={m.slug} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-6 first:border-t first:border-line">
+                <span className="num pt-1 text-sm text-fg-3">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <Link to={`/${m.slug}`} className="t-sub text-fg hover:text-accent">
+                    {m.name}
+                  </Link>
+                  <p className="reading mt-2 text-fg-2">{m.tagline}</p>
+                  <p className="mt-3 text-xs text-fg-3">{m.corridors.slice(0, 3).join(" · ")}</p>
+                </div>
+              </li>
             ))}
+          </ol>
         </div>
-        <Link
-          to="/nassau-county-commercial-real-estate"
-          className="mt-5 inline-block text-sm text-signal-soft hover:text-bone"
-        >
-          The whole county, in one read →
-        </Link>
-      </section>
+      </Reveal>
 
-      {/* why her */}
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="glass-deep grid gap-8 p-8 sm:p-10 md:grid-cols-3">
-          <div>
-            <p className="text-3xl font-semibold text-signal-soft">Both MLSs</p>
-            <p className="mt-2 text-sm leading-relaxed text-stone">
-              Member of realMLS (Northeast Florida) and AINCAR — every listing works both networks,
-              island and mainland.
-            </p>
-          </div>
-          <div>
-            <p className="text-3xl font-semibold text-signal-soft">Commercial only</p>
-            <p className="mt-2 text-sm leading-relaxed text-stone">
-              The firm's dedicated commercial desk. Zoning, lease structures, cap rates, and corridor
-              data — not a residential sideline.
-            </p>
-          </div>
-          <div>
-            <p className="text-3xl font-semibold text-signal-soft">Berkshire behind it</p>
-            <p className="mt-2 text-sm leading-relaxed text-stone">
-              {SITE.brokerageShort} — local ownership with the Berkshire Hathaway HomeServices
-              network's reach.
-            </p>
+      {/* why her — a ruled triptych on ink */}
+      <Reveal as="section" className="on-ink bg-ground text-fg">
+        <div className="wrap section">
+          <div className="grid sm:grid-cols-3">
+            {WHY.map((w, i) => (
+              <div
+                key={w.eyebrow}
+                className={`border-t border-line py-8 sm:pr-8 ${i > 0 ? "sm:border-l sm:pl-8" : ""}`}
+              >
+                <p className="eyebrow">{w.eyebrow}</p>
+                <h2 className="t-section mt-3">{w.head}</h2>
+                <p className="reading mt-4 text-fg-2">{w.body}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* the close */}
-      <section className="mx-auto max-w-4xl px-5 py-16" id="contact">
-        <p className="eyebrow">Start here</p>
-        <h2 className="font-display mt-2 text-2xl font-semibold sm:text-3xl">
-          Tell her what you're looking for.
-        </h2>
-        <p className="mt-3 max-w-2xl text-stone">
-          Five fields, one conversation. Requirements stay confidential.
-        </p>
-        <div className="mt-8">
+      <Reveal as="section" className="wrap section grid gap-10 lg:grid-cols-12 lg:gap-x-6" id="contact">
+        <div className="lg:col-span-5">
+          <p className="eyebrow">Start here</p>
+          <h2 className="t-section mt-3">Tell her what you're looking for.</h2>
+          <p className="reading mt-4 max-w-md text-fg-2">
+            Five fields, one conversation. Requirements stay confidential.
+          </p>
+          <p className="mt-6 text-sm text-fg-2">
+            <a href={telHref} className="text-fg hover:text-accent">
+              {SITE.phone}
+            </a>
+            <br />
+            <a href={mailHref} className="hover:text-fg">
+              {SITE.email}
+            </a>
+          </p>
+        </div>
+        <div className="lg:col-span-7">
           <LeadForm />
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }
