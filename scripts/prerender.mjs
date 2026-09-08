@@ -30,7 +30,10 @@ const profile = JSON.parse(await readFile(path.join(root, "src/data/profile.json
 const template = await readFile(path.join(dist, "index.html"), "utf8");
 
 const SAMPLE = listingData.sample === true;
-const listings = listingData.listings;
+// An agent feed can include residential records. This domain is intentionally
+// commercial-only, so never publish those URLs, links, or sitemap entries.
+const residentialRecords = listingData.listings.filter((l) => l.useType === "residential");
+const listings = listingData.listings.filter((l) => l.useType !== "residential");
 const markets = marketData.markets;
 
 /* ---------------------------------------------------------------------------
@@ -82,9 +85,10 @@ for (const [phrase, why] of banned) {
   if (allText.includes(phrase)) errors.push(`data contains "${phrase}" — ${why}; it does not belong here`);
 }
 
-if (!profile.licenseConfirmed) warnings.push("profile.licenseNumber is unconfirmed — Florida advertising rules require it before launch");
+if (!profile.licenseConfirmed) warnings.push("profile.licenseNumber is unconfirmed — confirm it before displaying the optional license number");
 if (!profile.titleConfirmed) warnings.push("displayed title is unconfirmed — confirm the exact wording with Antoinette");
 if (SAMPLE) warnings.push("SAMPLE inventory: listing pages are noindex'd and left out of the sitemap until real records land");
+if (residentialRecords.length) warnings.push(`${residentialRecords.length} residential record(s) excluded from this commercial site`);
 
 if (errors.length) {
   console.error("Prerender failed — the data does not meet the publication bar:\n" + errors.map((e) => `  ✗ ${e}`).join("\n"));
@@ -119,6 +123,7 @@ const AGENT_LD = {
   url: `${ORIGIN}/`,
   telephone: profile.phoneE164,
   email: profile.email,
+  sameAs: [profile.corporatePage],
   parentOrganization: { "@type": "RealEstateAgent", name: profile.brokerage, telephone: "+1-904-261-9311" },
   address: {
     "@type": "PostalAddress",
@@ -131,6 +136,9 @@ const AGENT_LD = {
   areaServed: profile.serviceAreas,
   ...(profile.portrait ? { image: `${ORIGIN}${profile.portrait}` } : {}),
 };
+
+// JSON-LD is embedded in a script tag. Keep CMS content from terminating it.
+const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 
 const crumbs = (items) => ({
   "@type": "BreadcrumbList",
@@ -158,7 +166,7 @@ function retag(html, { title, description, url, noindex = false }) {
 
 function inject(html, jsonLd, body) {
   return html
-    .replace("</head>", `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`)
+    .replace("</head>", `<script type="application/ld+json">${json(jsonLd)}</script>\n</head>`)
     .replace(
       '<div id="root"></div>',
       `<div id="root"><div style="max-width:60rem;margin:0 auto;padding:5rem 1.25rem 4rem;color:#1B1714;background:#F8F5EF;font-family:'Instrument Sans Variable','Helvetica Neue',Arial,sans-serif;line-height:1.6">${body}</div></div>`
@@ -434,11 +442,18 @@ const urls = [
   ["/about", "0.6"],
   ["/contact", "0.6"],
 ]
-  .map(([route, priority]) => `  <url><loc>${ORIGIN}${route === "/" ? "/" : route}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`)
+  .map(([route, priority]) => {
+    const listing = listings.find((l) => listingPath(l) === route);
+    const image = listing?.photos?.[0];
+    const imageXml = image
+      ? `\n    <image:image><image:loc>${esc(`${ORIGIN}${image.src}`)}</image:loc><image:title>${esc(listing.headline)}</image:title></image:image>`
+      : "";
+    return `  <url><loc>${ORIGIN}${route === "/" ? "/" : route}</loc><lastmod>${today}</lastmod><priority>${priority}</priority>${imageXml}</url>`;
+  })
   .join("\n");
 await writeFile(
   path.join(dist, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`
 );
 
 console.log(`Prerendered ${pages.length} routes + sitemap (${ORIGIN})${SAMPLE ? " — sample inventory, listing pages noindex'd" : ""}.`);

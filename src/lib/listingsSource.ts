@@ -21,7 +21,12 @@ export const LIVE_LISTINGS = import.meta.env.VITE_USE_LIVE_LISTINGS === "true";
 /** True while the JSON still carries the demonstration records. */
 export const SAMPLE_DATA: boolean = raw.sample === true;
 
-const authored: CommercialListing[] = (raw.listings as CommercialListing[]).map(derive);
+// This is a commercial-only site. Source exports can include an agent's
+// residential records, but they must never leak into the commercial index,
+// internal links, or search-engine inventory.
+const authored: CommercialListing[] = (raw.listings as CommercialListing[])
+  .filter((listing) => listing.useType !== "residential")
+  .map(derive);
 
 export function allListings(): CommercialListing[] {
   return authored;

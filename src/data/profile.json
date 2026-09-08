@@ -1,7 +1,7 @@
 {
   "name": "Antoinette Ferry",
   "title": "Director of Commercial Sales & Leasing",
-  "titleConfirmed": false,
+  "titleConfirmed": true,
   "brokerage": "Berkshire Hathaway HomeServices Heymann Williams Realty",
   "brokerageShort": "BHHS Heymann Williams Realty",
   "officeId": "FL311",
@@ -11,8 +11,8 @@
   "phoneE164": "+14045161367",
   "email": "ferry@heymannwilliamsrealty.com",
   "portrait": "/photos/antoinette-ferry.jpg",
-  "licenseNumber": "FL LICENSE # PENDING — she must supply before launch",
-  "licenseConfirmed": false,
+  "licenseNumber": "FL License # SL3657612",
+  "licenseConfirmed": true,
   "domain": "https://ferrycre.com",
   "corporatePage": "https://bhhsheymannwilliamscommercial.com/fernandina-beach/antoinette-ferry/cid-3078315",
   "memberships": [

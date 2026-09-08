@@ -9,14 +9,19 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# SPA fallback — prerendered .html files and functions are matched first.
-# Deliberately NOT forced: Netlify serves matching static files before an
-# unforced redirect, so /yulee-commercial-real-estate resolves to its own
-# prerendered HTML with its title, canonical, and JSON-LD intact.
+# The map is intentionally client-rendered, so it alone receives a successful
+# SPA fallback. Prerendered files and functions are matched before redirects.
+[[redirects]]
+  from = "/explore"
+  to = "/index.html"
+  status = 200
+
+# Unknown URLs must be real 404s. Returning index.html with a 200 lets stale
+# or mistyped URLs become crawlable duplicate pages.
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
+  status = 404
 
 [[headers]]
 for = "/*"

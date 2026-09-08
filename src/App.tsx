@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Layout from "./components/Layout";
 import { markets } from "./lib/markets";
@@ -13,6 +13,10 @@ const About = lazy(() => import("./routes/About"));
 const Contact = lazy(() => import("./routes/Contact"));
 
 function NotFound() {
+  useEffect(() => {
+    const robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (robots) robots.content = "noindex, follow";
+  }, []);
   return (
     <section className="wrap section text-center">
       <p className="eyebrow mb-4">404</p>
