@@ -34,15 +34,26 @@ function Wordmark({
   mark = "full",
   className = "",
   imgClassName = "h-9",
+  hidden = false,
 }: {
   variant: "cream" | "cab" | "black";
   mark?: keyof typeof MARK;
   className?: string;
   imgClassName?: string;
+  /** apparate-on-scroll: mounted but invisible until the hero it stands in for has scrolled away */
+  hidden?: boolean;
 }) {
   const m = MARK[mark];
   return (
-    <Link to="/" className={`flex items-center ${className}`} aria-label={`${BRAND} — ${SITE.name}, home`}>
+    <Link
+      to="/"
+      className={`flex items-center transition-all delay-100 duration-500 ease-out ${
+        hidden ? "pointer-events-none scale-90 opacity-0" : "scale-100 opacity-100"
+      } ${className}`}
+      aria-label={`${BRAND} — ${SITE.name}, home`}
+      aria-hidden={hidden}
+      tabIndex={hidden ? -1 : undefined}
+    >
       <img
         src={`/brand/${m.file}-${variant}.svg`}
         alt={m.alt}
@@ -70,7 +81,7 @@ function Header() {
     >
       <SampleNotice />
       <div className="wrap flex h-16 items-center justify-between gap-6">
-        <Wordmark variant={onInk ? "cream" : "cab"} mark="name" imgClassName="h-11" />
+        <Wordmark variant={onInk ? "cream" : "cab"} mark="name" imgClassName="h-11" hidden={onInk} />
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
           {NAV.map((n) => (
             <NavLink

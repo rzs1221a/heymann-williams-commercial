@@ -37,49 +37,48 @@ export default function Home() {
 
   return (
     <>
-      {/* the hero: her, her market, one line — on ink */}
+      {/* the hero: the mark, centered, standing in for a headline — on ink */}
       <section className="on-ink bg-ground text-fg">
-        <div className="wrap section grid gap-12 lg:grid-cols-12 lg:gap-x-6">
-          <div className="lg:col-span-8">
-            <p className="eyebrow">Nassau County · Florida</p>
-            <h1 className="t-hero mt-6">Commercial real estate, from the port to the interstate.</h1>
-            <p className="reading-lg mt-8 max-w-2xl text-fg-2">
-              {SITE.name} is {SITE.title} at {SITE.brokerageShort}, the county's dedicated commercial
-              practice. She handles sales, leasing, and tenant and landlord representation across
-              Fernandina Beach, Amelia Island, Yulee, and Callahan.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a href={SITE.mlsFeedPage} rel="noopener" className="btn-primary px-6 py-3 text-sm">
-                View all my listings ↗
-              </a>
-              <Link to="/listings" className="btn-outline px-6 py-3 text-sm">
-                Current listings
-              </Link>
-              <a href={telHref} className="btn-outline px-6 py-3 text-sm">
-                Call {SITE.phone}
-              </a>
-            </div>
+        <div className="wrap section flex flex-col items-center text-center">
+          <p className="eyebrow">Nassau County · Florida</p>
+          <h1 className="mt-8">
             <img
               src="/brand/hw-commercial-lockup-cream.svg"
-              alt="Berkshire Hathaway HomeServices Heymann Williams Realty"
+              alt="Commercial real estate, from the port to the interstate. Berkshire Hathaway HomeServices Heymann Williams Realty — Commercial Division"
               width={874}
               height={302}
-              className="mt-14 h-10 w-auto"
+              className="h-16 w-auto sm:h-24 lg:h-28"
             />
+          </h1>
+          <p className="reading-lg mt-8 max-w-2xl text-fg-2">
+            {SITE.name} is {SITE.title} at {SITE.brokerageShort}, the county's dedicated commercial
+            practice. She handles sales, leasing, and tenant and landlord representation across
+            Fernandina Beach, Amelia Island, Yulee, and Callahan.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <a href={SITE.mlsFeedPage} rel="noopener" className="btn-primary px-6 py-3 text-sm">
+              View all my listings ↗
+            </a>
+            <Link to="/listings" className="btn-outline px-6 py-3 text-sm">
+              Current listings
+            </Link>
+            <a href={telHref} className="btn-outline px-6 py-3 text-sm">
+              Call {SITE.phone}
+            </a>
           </div>
           {SITE.portrait && (
-            <div className="flex items-end gap-5 lg:col-span-3 lg:col-start-10 lg:self-end">
+            <div className="mt-14 flex items-center gap-4">
               <Photo
                 src={SITE.portrait}
                 alt={SITE.name}
                 widths={[320, 640]}
-                sizes="112px"
+                sizes="80px"
                 loading="eager"
-                width={112}
-                height={112}
-                className="h-28 w-28 shrink-0 rounded object-cover shadow-[0_24px_48px_-28px_rgb(0_0_0/0.6)]"
+                width={80}
+                height={80}
+                className="h-20 w-20 shrink-0 rounded object-cover shadow-[0_24px_48px_-28px_rgb(0_0_0/0.6)]"
               />
-              <div className="text-sm leading-snug">
+              <div className="text-left text-sm leading-snug">
                 <p className="font-medium text-fg">{SITE.name}</p>
                 <p className="mt-1 text-fg-3">{SITE.title}</p>
                 <a href={mailHref} className="mt-2 block text-accent hover:text-fg">
