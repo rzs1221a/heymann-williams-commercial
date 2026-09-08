@@ -22,11 +22,12 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 
-const ORIGIN = (process.env.URL || "https://ferrycre.com").replace(/\/$/, "");
-
 const listingData = JSON.parse(await readFile(path.join(root, "src/data/listings.json"), "utf8"));
 const marketData = JSON.parse(await readFile(path.join(root, "src/data/markets.json"), "utf8"));
 const profile = JSON.parse(await readFile(path.join(root, "src/data/profile.json"), "utf8"));
+// Always publish canonical URLs for the configured public domain. Netlify's
+// built-in URL points at a deploy-specific .netlify.app address during builds.
+const ORIGIN = (process.env.SITE_ORIGIN || profile.domain || "https://heymannwilliamscommercial.com").replace(/\/$/, "");
 const template = await readFile(path.join(dist, "index.html"), "utf8");
 
 const SAMPLE = listingData.sample === true;
