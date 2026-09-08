@@ -41,13 +41,20 @@ export default function Home() {
       <section className="on-ink bg-ground text-fg">
         <div className="wrap section flex flex-col items-center text-center">
           <p className="eyebrow">Nassau County · Florida</p>
-          <h1 className="mt-8">
+          <h1 className="mt-8 flex flex-col items-center">
             <img
-              src="/brand/hw-commercial-lockup-cream.svg"
-              alt="Commercial real estate, from the port to the interstate. Berkshire Hathaway HomeServices Heymann Williams Realty — Commercial Division"
-              width={874}
-              height={302}
+              src="/brand/hw-name-lockup-cream.svg"
+              alt="Commercial real estate, from the port to the interstate. Berkshire Hathaway HomeServices Heymann Williams Realty"
+              width={875}
+              height={195}
               className="h-16 w-auto sm:h-24 lg:h-28"
+            />
+            <img
+              src="/brand/hw-mark-lockup-cream.svg"
+              alt=""
+              width={701}
+              height={106}
+              className="mt-2 h-[35px] w-auto sm:mt-3 sm:h-[52px] lg:h-[61px]"
             />
           </h1>
           <p className="reading-lg mt-8 max-w-2xl text-fg-2">
