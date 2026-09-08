@@ -37,6 +37,15 @@ collections:
           - { name: licenseConfirmed, label: "License number confirmed", widget: boolean }
           - { name: domain, label: "Site domain", widget: string }
           - { name: corporatePage, label: "BHHS corporate profile URL", widget: string }
+          - { name: googleBusinessProfile, label: "Google Business Profile URL", widget: string, required: false, hint: "The stable maps.google.com/?cid=… link. Feeds the site's structured data so Google links the profile and the site." }
+          - name: officeGeo
+            label: "Office map pin"
+            widget: object
+            required: false
+            hint: "Match the pin on the Google Business Profile."
+            fields:
+              - { name: lat, label: "Latitude", widget: number, value_type: float }
+              - { name: lng, label: "Longitude", widget: number, value_type: float }
           - { name: memberships, label: "Memberships", widget: list, field: { name: item, label: "Membership", widget: string } }
           - { name: bio, label: "Bio (your own words)", widget: text }
           - { name: bioConfirmed, label: "Bio written by you (turns the bio on)", widget: boolean }

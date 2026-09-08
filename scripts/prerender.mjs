@@ -124,7 +124,11 @@ const AGENT_LD = {
   url: `${ORIGIN}/`,
   telephone: profile.phoneE164,
   email: profile.email,
-  sameAs: [profile.corporatePage],
+  sameAs: [profile.corporatePage, profile.googleBusinessProfile].filter(Boolean),
+  ...(profile.googleBusinessProfile ? { hasMap: profile.googleBusinessProfile } : {}),
+  ...(profile.officeGeo
+    ? { geo: { "@type": "GeoCoordinates", latitude: profile.officeGeo.lat, longitude: profile.officeGeo.lng } }
+    : {}),
   parentOrganization: { "@type": "RealEstateAgent", name: profile.brokerage, telephone: "+1-904-261-9311" },
   address: {
     "@type": "PostalAddress",
