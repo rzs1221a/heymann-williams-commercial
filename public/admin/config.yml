@@ -7,8 +7,8 @@ backend:
 media_folder: "public/photos"
 public_folder: "/photos"
 
-site_url: https://ferrycre.com
-display_url: https://ferrycre.com
+site_url: https://heymannwilliamscommercial.com
+display_url: https://heymannwilliamscommercial.com
 
 publish_mode: simple
 

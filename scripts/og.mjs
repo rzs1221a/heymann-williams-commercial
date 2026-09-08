@@ -14,7 +14,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <text x="80" y="398" font-family="${F}" font-size="22" fill="#5C554E">Director of Commercial Sales &amp; Leasing</text>
   <rect x="80" y="430" width="48" height="3" fill="#670038"/>
   <text x="80" y="468" font-family="${F}" font-size="18" fill="#726A62">Nassau County commercial real estate</text>
-  <text x="80" y="560" font-family="${F}" font-size="16" fill="#8b8177">ferrycre.com</text>
+  <text x="80" y="560" font-family="${F}" font-size="16" fill="#8b8177">heymannwilliamscommercial.com</text>
 </svg>`;
 
 const logo = await sharp(path.join(root, "public/brand/hw-commercial-lockup-cab.svg"))
