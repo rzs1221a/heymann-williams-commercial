@@ -129,6 +129,18 @@ export default function ListingDetail() {
       <div className="mt-8 overflow-hidden rounded-3xl">
         <img src={hero?.src} alt={hero?.alt ?? l.headline} width={1600} height={900} className="aspect-[16/9] w-full object-cover" />
       </div>
+      {l.photos.length > 1 ? (
+        <section className="mt-4" aria-label="Property photos">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {l.photos.slice(1).map((p) => (
+              <a key={p.src} href={p.src} target="_blank" rel="noopener" className="block overflow-hidden rounded-2xl">
+                <img src={p.src} alt={p.alt} loading="lazy" width={800} height={533} className="aspect-[3/2] w-full object-cover transition-transform hover:scale-[1.03]" />
+              </a>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-faint">{l.photos.length} photos · MLS #{l.mlsNumber}</p>
+        </section>
+      ) : null}
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_380px]">
         <div>
