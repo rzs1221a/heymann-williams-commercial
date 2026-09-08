@@ -377,6 +377,22 @@ select.field option {
   transform: none;
 }
 
+/* the header call button — a slow ring pulse draws the eye without nagging */
+@keyframes phone-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(103 0 56 / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgb(103 0 56 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(103 0 56 / 0);
+  }
+}
+.btn-phone-pulse {
+  animation: phone-pulse 2.6s ease-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

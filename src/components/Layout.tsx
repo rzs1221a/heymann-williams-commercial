@@ -98,7 +98,14 @@ function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href={telHref} className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
+          <a
+            href={telHref}
+            aria-hidden={onInk}
+            tabIndex={onInk ? -1 : undefined}
+            className={`btn-primary btn-phone-pulse hidden px-4 py-2 text-sm transition-all delay-100 duration-500 ease-out sm:inline-flex ${
+              onInk ? "pointer-events-none scale-90 opacity-0" : "scale-100 opacity-100"
+            }`}
+          >
             {SITE.phone}
           </a>
           <button
