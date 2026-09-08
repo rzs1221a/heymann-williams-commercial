@@ -34,7 +34,7 @@ deepest document about that property on the internet.
 | `src/lib/attunement.ts` | local-only behavioral profile; BoldTrail export seam (phase 2) |
 | `src/routes/Explore.tsx` | the map instrument — lazy, code-split, never prerendered |
 | `scripts/prerender.mjs` | stamps static HTML + JSON-LD per route, regenerates sitemap, **fails the build** on dirty data |
-| `netlify/functions/lead-submit.mts` | form → BoldTrail Lead Dropbox (email-parser protocol) with direct-email fallback, TCPA logging |
+| `netlify/functions/lead-submit.mts` | form → Antoinette's email, with delivery logging and TCPA consent records |
 
 ## The honesty gate
 
@@ -56,7 +56,7 @@ excluded from the sitemap, and the site shows a discreet preview notice.
 3. FL license number (`licenseConfirmed: true`) — required on advertising
 4. Exact displayed title confirmation
 5. Photography for the three listings still on SVG placeholders
-6. `BOLDTRAIL_DROPBOX_EMAIL` + a mail transport in the Netlify env
+6. A mail transport in the Netlify environment
 
 ## Performance rules (non-negotiable)
 

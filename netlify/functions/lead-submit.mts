@@ -1,21 +1,8 @@
 /**
- * BoldTrail (kvCORE) Lead Dropbox ingestion — single-agent edition.
- *
- * The dropbox is an EMAIL PARSER, not an API:
- *   - Subject must be exactly "Add Contact"
- *   - Body must be plain text, line-based, "Field Name: value"
- *   - A malformed message is DISCARDED SILENTLY — no bounce, no error.
- *
- * Because of that silent-failure mode, every submission is persisted with a
- * correlation ID before the send, so a missing contact traces back to an
- * exact payload. Antoinette's BoldTrail instance:
- * antoinetteferry.heymannwilliams.com — set BOLDTRAIL_DROPBOX_EMAIL to her
- * agent-scoped dropbox address. Until it's set, leads fall back to direct
- * email (LEAD_FALLBACK_EMAIL, default her brokerage inbox) — swappable from
- * the Netlify dashboard without a redeploy.
- *
- * TCPA: consent must be an explicit true, and the exact consent language,
- * timestamp, and source URL are stored with every submission.
+ * Direct lead-email delivery. Every valid submission is persisted with a
+ * correlation ID before it is sent to Antoinette, so a delivery issue can be
+ * traced to its exact payload. TCPA consent, timestamp, and source URL are
+ * stored with every submission.
  */
 import { getStore } from '@netlify/blobs';
 import nodemailer from 'nodemailer';
@@ -103,10 +90,10 @@ const contextLabel = (k: string) =>
   k.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, (c) => c.toUpperCase());
 
 /**
- * The dropbox body. Parser fields first; then the intent story retold as a
- * short briefing (kvCORE files the whole body into a Custom Note).
+ * The email body begins with the contact fields, followed by a concise
+ * commercial briefing and the recorded consent.
  */
-function formatBody(lead: Lead, forDropbox: boolean): string {
+function formatBody(lead: Lead): string {
   const lines: string[] = [`First Name: ${lead.firstName}`, `Last Name: ${lead.lastName}`];
   if (lead.email) lines.push(`Email: ${lead.email}`);
   if (lead.phone) lines.push(`Phone: ${lead.phone}`);
@@ -141,7 +128,7 @@ function formatBody(lead: Lead, forDropbox: boolean): string {
     `Submitted through ferrycre.com (${singleLine(lead.sourceUrl)}). ` +
       `Consent to be contacted was given on ${lead.consentTimestamp}: "${singleLine(lead.consentText).slice(0, 400)}"`
   );
-  if (!forDropbox) lines.unshift('New commercial lead from ferrycre.com', '');
+  lines.unshift('New commercial lead from ferrycre.com', '');
   return lines.join('\n');
 }
 
@@ -192,14 +179,12 @@ export default async (req: Request): Promise<Response> => {
     return json(429, { ok: false, correlationId, error: 'Too many submissions. Please try again shortly.' });
   }
 
-  // Routing: dropbox when configured, direct email to her otherwise.
-  const dropbox = process.env.BOLDTRAIL_DROPBOX_EMAIL ?? '';
-  const fallback = process.env.LEAD_FALLBACK_EMAIL || 'ferry@heymannwilliamsrealty.com';
-  const to = dropbox || fallback;
-  const viaDropbox = Boolean(dropbox);
+  // Leads always go directly to Antoinette. This can be changed in Netlify
+  // without a redeploy if her email address changes.
+  const to = process.env.LEAD_RECIPIENT_EMAIL || 'ferry@heymannwilliamsrealty.com';
 
-  // Transport: Gmail SMTP with an app password (the path the dropbox parser
-  // is proven against), or any SMTP server via SMTP_* vars.
+  // Transport: Gmail SMTP with an app password, or any SMTP server via
+  // SMTP_* variables.
   const gmailUser = process.env.GMAIL_USER ?? '';
   const gmailPass = (process.env.GMAIL_APP_PASSWORD ?? '').replace(/\s+/g, '');
   const smtpHost = process.env.SMTP_HOST ?? '';
@@ -207,7 +192,7 @@ export default async (req: Request): Promise<Response> => {
   const record = {
     correlationId,
     receivedAt,
-    routedTo: viaDropbox ? 'boldtrail-dropbox' : 'direct-email',
+    routedTo: 'direct-email',
     payload: {
       firstName: lead.firstName,
       lastName: lead.lastName,
@@ -269,16 +254,14 @@ export default async (req: Request): Promise<Response> => {
     const info = await mailer.sendMail({
       from: gmailPass ? gmailUser : process.env.SMTP_FROM || process.env.SMTP_USER || '',
       to,
-      // exact — any prefix/suffix breaks the dropbox parser
-      subject: viaDropbox ? 'Add Contact' : `ferrycre.com lead: ${lead.firstName} ${lead.lastName}`,
-      // plain text only; an HTML wrapper breaks the line-based parse
-      text: formatBody(lead, viaDropbox)
+      subject: `ferrycre.com lead: ${lead.firstName} ${lead.lastName}`,
+      text: formatBody(lead)
     });
 
     record.delivery.status = 'sent';
     record.delivery.providerId = info.messageId ?? null;
     await persist();
-    console.info(`[lead-submit] ${correlationId} sent via ${viaDropbox ? 'dropbox' : 'fallback email'}`);
+    console.info(`[lead-submit] ${correlationId} sent by direct email`);
     return json(200, { ok: true, correlationId });
   } catch (err) {
     record.delivery.status = 'failed';

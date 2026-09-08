@@ -13,13 +13,11 @@ Antoinette can supply.
   Netlify there, which is the ownership end-state. No base directory needed;
   `netlify.toml` at the root governs the build.
 - **Environment variables** (Site settings → Environment):
-  - `BOLDTRAIL_DROPBOX_EMAIL` — her kvCORE/BoldTrail Lead Dropbox address.
-    Server-side only; treat it as a write credential into her CRM. Without it,
-    leads fall back to direct email — the site still works.
   - Mail transport (**required for lead delivery**): either
     `GMAIL_USER` + `GMAIL_APP_PASSWORD`, or
     `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM`.
-  - `LEAD_FALLBACK_EMAIL` — defaults to ferry@heymannwilliamsrealty.com.
+  - `LEAD_RECIPIENT_EMAIL` — optional; defaults to ferry@heymannwilliamsrealty.com.
+    Every form lead is sent to this email address.
   - Optional: `VITE_GOOGLE_3D_TILES_KEY` (photoreal street dive),
     `VITE_GA4_ID` (analytics).
 - **/admin (Decap CMS):** enable Identity (invite-only) + Git Gateway, then
